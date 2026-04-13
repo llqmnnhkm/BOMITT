@@ -1,0 +1,238 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            background-color: #f5f5f5; 
+            background-image: url('../../assets/bg_home.png');
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-color: #e3f2fd; 
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 30px;
+            margin-right: 30px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;  
+        }
+
+        .guest-badge {
+            background: #e0f2f1;
+            color: #00897b;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.875rem;
+            font-family: Montserrat;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .guest-badge:hover {
+            background: #c8e6c9;
+        }
+
+        input[disabled] {
+            background-color: #f1f1f1 !important;
+            color: #999 !important;
+            border-color: #ddd !important;
+            cursor: not-allowed !important;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            color: #ee7766;
+            min-width: 150px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border-radius: 6px;
+            z-index: 100;
+            text-align: left;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            font-family: Montserrat;
+            font-size: 0.875rem;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ee7766;
+            border-radius: 6px;
+            color: white;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        /* === WELCOME SECTION === */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem; /* Added */
+            backdrop-filter: blur(5px);
+        }
+
+        .welcome-section h2 {
+            font-family: Montserrat;
+            color: white;
+            margin-bottom: 0.75rem;
+            font-size: clamp(1.8rem, 3vw, 2.75rem);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            color: #0070ef;
+            text-align: center;
+            margin-top: 0.5rem; /* ⬅️ CHANGED FROM 10.5rem */
+            font-weight: 500;
+        }
+
+        .top-textboxes {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 2.5rem;
+        }
+
+        .textbox-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .textbox-item label {
+            font-weight: 600;
+        }
+
+        .textbox-item input, .textbox-item select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .project-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 15rem auto 0 auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none;
+            width: 90%;
+            max-width: 1400px;
+        }
+        .project-container.active {
+            display: block;
+        }
+        
+        .container-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .container-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        .container-icon.server { 
+            background: #ee7766; 
+        }
+        
+        .container-title h3 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .container-title p {
+            font-size: 0.875rem;
+            color: #999;
+        }
+
+        .required {
+            color: #e53935;
+        }
+
+        footer {
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 10rem;
+        }
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: #999;
+            font-size: 0.875rem;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #43a047;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
