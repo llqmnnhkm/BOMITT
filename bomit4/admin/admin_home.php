@@ -47,7 +47,7 @@ $user_id = $_SESSION['user_id'];
 <body>
     <!-- Admin Header -->
     <header class="admin-header">
-        <h1>🛠️ BoMIT Admin Dashboard</h1>
+        <h1>BoMIT Admin Dashboard</h1>
         <div class="user-section">
             <span class="admin-badge">ADMIN</span>
             <div class="dropdown">
@@ -71,7 +71,7 @@ $user_id = $_SESSION['user_id'];
         <!-- Management Categories -->
         <div class="categories-grid" style="grid-template-columns: repeat(4, 1fr);">
             <div class="category-card" id="card-server">
-                <div class="category-header server">🖥️</div>
+                <div class="category-header server"></div>
                 <div class="category-body">
                     <h3>Server Infrastructure</h3>
                     <p>Manage server equipment and configurations</p>
@@ -80,7 +80,7 @@ $user_id = $_SESSION['user_id'];
             </div>
 
             <div class="category-card" id="card-network">
-                <div class="category-header network">🌐</div>
+                <div class="category-header network"></div>
                 <div class="category-body">
                     <h3>Network Infrastructure</h3>
                     <p>Manage network equipment and pricing</p>
@@ -89,7 +89,7 @@ $user_id = $_SESSION['user_id'];
             </div>
 
             <div class="category-card" id="card-conference">
-                <div class="category-header conference">💥</div>
+                <div class="category-header conference"></div>
                 <div class="category-body">
                     <h3>Conference Room</h3>
                     <p>Manage meeting room technology</p>
@@ -98,7 +98,7 @@ $user_id = $_SESSION['user_id'];
             </div>
 
             <div class="category-card" id="card-enduser">
-                <div class="category-header enduser">💻</div>
+                <div class="category-header enduser"></div>
                 <div class="category-body">
                     <h3>End User Equipment</h3>
                     <p>Manage workstations and peripherals</p>
@@ -108,7 +108,7 @@ $user_id = $_SESSION['user_id'];
 
             <div class="category-card" id="card-accounts"
                  style="grid-column: 4;">
-                <div class="category-header" style="background:linear-gradient(135deg,#0070ef,#4527a0);">👤</div>
+                <div class="category-header" style="background:linear-gradient(135deg,#0070ef,#4527a0);"></div>
                 <div class="category-body">
                     <h3>Account Manager</h3>
                     <p>Create and manage user accounts</p>
@@ -121,7 +121,7 @@ $user_id = $_SESSION['user_id'];
         <div id="container-server" class="management-container">
             <div class="container-header">
                 <div class="header-left">
-                    <div class="container-icon server">🖥️</div>
+                    <div class="container-icon server"></div>
                     <div class="container-title">
                         <h3>Server Infrastructure Management</h3>
                         <p>Add, edit, or remove server equipment items</p>
@@ -135,7 +135,7 @@ $user_id = $_SESSION['user_id'];
         <div id="container-network" class="management-container">
             <div class="container-header">
                 <div class="header-left">
-                    <div class="container-icon network">🌐</div>
+                    <div class="container-icon network"></div>
                     <div class="container-title">
                         <h3>Network Infrastructure Management</h3>
                         <p>Add, edit, or remove network equipment items</p>
@@ -149,7 +149,7 @@ $user_id = $_SESSION['user_id'];
         <div id="container-conference" class="management-container">
             <div class="container-header">
                 <div class="header-left">
-                    <div class="container-icon conference">💥</div>
+                    <div class="container-icon conference"></div>
                     <div class="container-title">
                         <h3>Conference Room Management</h3>
                         <p>Add, edit, or remove conference equipment items</p>
@@ -163,7 +163,7 @@ $user_id = $_SESSION['user_id'];
         <div id="container-enduser" class="management-container">
             <div class="container-header">
                 <div class="header-left">
-                    <div class="container-icon enduser">💻</div>
+                    <div class="container-icon enduser"></div>
                     <div class="container-title">
                         <h3>End User Equipment Management</h3>
                         <p>Add, edit, or remove end user equipment items</p>
@@ -178,7 +178,7 @@ $user_id = $_SESSION['user_id'];
         <div id="container-accounts" class="management-container">
             <div class="container-header">
                 <div class="header-left">
-                    <div class="container-icon accounts">👤</div>
+                    <div class="container-icon accounts"></div>
                     <div class="container-title">
                         <h3>Account Manager</h3>
                         <p>Create, edit and manage user accounts</p>
@@ -208,7 +208,7 @@ $user_id = $_SESSION['user_id'];
 
     <footer>
         <div class="footer-content">
-            © 2024 IT Equipment BoM System - Admin Dashboard. All rights reserved.
+            © 2026 IT Equipment BoM System - Admin Dashboard. All rights reserved.
         </div>
     </footer>
 

@@ -1,7 +1,7 @@
 <!-- Network Container -->
 <div id="container-network" class="question-container">
     <div class="container-header">
-        <div class="container-icon network">🌐</div>
+        <div class="container-icon network"></div>
         <div class="container-title">
             <h3>Network Infrastructure</h3>
             <p>Configure networking requirements</p>
@@ -43,25 +43,25 @@
             <!-- Reset Button (clears form, doesn't delete database) -->
             <button type="button" onclick="resetNetworkConfiguration()" class="btn btn-warning" 
                 style="flex: 0.8; background: #f59e0b; color: white;">
-                🔄 Reset Form
+                 Reset Form
             </button>
             
             <!-- Save Configuration Button -->
             <button type="button" onclick="saveNetworkConfiguration()" class="btn btn-success" 
                 style="flex: 1; background: #10b981; color: white;">
-                💾 Save Configuration
+                 Save Configuration
             </button>
             
             <!-- View Report Button -->
             <button type="button" onclick="showNetworkReport()" class="btn btn-primary" 
                 style="flex: 1; background: linear-gradient(90deg, #0070ef 0%, #4A90E2 100%); color: white;">
-                📊 View Report Summary
+                 View Report Summary
             </button>
             
             <!-- Cancel Button -->
             <button type="button" class="btn btn-secondary" onclick="hideAllContainers()" 
                 style="flex: 0.6; background: #e2e8f0; color: #4a5568;">
-                ❌ Cancel
+                 Cancel
             </button>
         </div>
     </form>

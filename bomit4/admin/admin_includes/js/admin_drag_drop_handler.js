@@ -3,7 +3,7 @@
 
 let draggedElement = null;
 
-console.log('🎯 Drag-Drop Handler Loaded');
+console.log('Drag-Drop Handler Loaded');
 
 // Initialize drag-and-drop on page load
 document.addEventListener('DOMContentLoaded', function() {

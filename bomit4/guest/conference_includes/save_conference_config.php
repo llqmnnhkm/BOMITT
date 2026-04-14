@@ -48,8 +48,9 @@ $configuration = [
     ],
     'room_info' => [
         'conference_size'        => $_POST['conference_size']        ?? '',
-        'conference_meeting_type'=> $_POST['conference_meeting_type'] ?? '',
-        'conference_setup_type'  => $_POST['conference_setup_type']  ?? '',
+        'room_state'             => json_decode($_POST['room_state'] ?? '{}', true),
+        'conference_meeting_type'=> '',
+        'conference_setup_type'  => '',
     ],
     'av_connectivity' => [
         'display_type'     => $_POST['av_display_type']      ?? '',

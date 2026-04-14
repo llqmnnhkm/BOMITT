@@ -45,7 +45,7 @@ $categories = [
 <!-- Action Bar -->
 <div class="action-bar">
     <h4>Conference Room Equipment</h4>
-    <button class="add-btn" onclick="openConferenceModal('add')">➕ Add Equipment</button>
+    <button class="add-btn" onclick="openConferenceModal('add')">Add Equipment</button>
 </div>
 
 <!-- Equipment Table -->
@@ -74,8 +74,8 @@ $categories = [
             <td><?php echo $row['default_quantity']; ?></td>
             <td><span class="price-badge"><?php echo formatPrice($row['unit_price']); ?></span></td>
             <td>
-                <button class="btn-edit" onclick='editConferenceItem(<?php echo json_encode($row); ?>)'>✏️ Edit</button>
-                <button class="btn-delete" onclick="deleteConferenceItem(<?php echo $row['id']; ?>)">🗑️ Delete</button>
+                <button class="btn-edit" onclick='editConferenceItem(<?php echo json_encode($row); ?>)'>Edit</button>
+                <button class="btn-delete" onclick="deleteConferenceItem(<?php echo $row['id']; ?>)">Delete</button>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -289,8 +289,8 @@ function addConferenceRow(id, formData) {
         <td>${formData.get('quantity')}</td>
         <td><span class="price-badge">$${parseFloat(formData.get('price')).toFixed(2)}</span></td>
         <td>
-            <button class="btn-edit" onclick='editConferenceItem(${JSON.stringify(itemData)})'>✏️ Edit</button>
-            <button class="btn-delete" onclick="deleteConferenceItem(${id})">🗑️ Delete</button>
+            <button class="btn-edit" onclick='editConferenceItem(${JSON.stringify(itemData)})'>Edit</button>
+            <button class="btn-delete" onclick="deleteConferenceItem(${id})">Delete</button>
         </td>
     `;
     tbody.appendChild(row);

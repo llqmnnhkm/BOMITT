@@ -61,7 +61,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
         <div id="container-server" class="project-container active" style="max-width: 900px;">
             <div class="container-header" style="justify-content: space-between;">
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <div class="container-icon server">📋</div>
+                    <div class="container-icon server"></div>
                     <div class="container-title">
                         <h3>Project Details</h3>
                         <p>Specify your project details for easier configuration</p>
@@ -242,7 +242,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
         const formData = new FormData(this);
         
         // Log for debugging
-        console.log('📝 Submitting Project Details:');
+        console.log('Submitting Project Details:');
         for (let [key, value] of formData.entries()) {
             console.log(`  ${key}: ${value}`);
         }
@@ -263,7 +263,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
     }
 
     // Log current values on page load
-    console.log('📋 Current Project Details:');
+    console.log('Current Project Details:');
     console.log('  Project Name:', document.querySelector('input[name="project_name"]').value);
     console.log('  Manager:', document.querySelector('input[name="requesting_manager"]').value);
     console.log('  Duration:', document.querySelector('input[name="project_duration"]').value, 'months');

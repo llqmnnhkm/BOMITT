@@ -16,7 +16,7 @@ requireAdminAuth($conn);
 <!-- Action Bar -->
 <div class="action-bar">
     <h4>Cables & Accessories</h4>
-    <button class="add-btn" onclick="openCableModal('add')">➕ Add Item</button>
+    <button class="add-btn" onclick="openCableModal('add')">Add Item</button>
 </div>
 
 <!-- Cable Table -->
@@ -44,8 +44,8 @@ requireAdminAuth($conn);
             <td><?php echo $row['default_quantity']; ?></td>
             <td><span class="price-badge"><?php echo formatPrice($row['unit_price']); ?></span></td>
             <td>
-                <button class="btn-edit" onclick='editCable(<?php echo json_encode($row); ?>)'>✏️ Edit</button>
-                <button class="btn-delete" onclick="deleteCable(<?php echo $row['id']; ?>)">🗑️ Delete</button>
+                <button class="btn-edit" onclick='editCable(<?php echo json_encode($row); ?>)'>Edit</button>
+                <button class="btn-delete" onclick="deleteCable(<?php echo $row['id']; ?>)">Delete</button>
             </td>
         </tr>
         <?php endforeach; ?>

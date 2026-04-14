@@ -39,7 +39,7 @@ $site_types = getAllSiteTypes();
     <h4>Network Equipment Items
         <span id="net-eq-row-count" style="font-size:.85rem; font-weight:400; color:#888; margin-left:.5rem;"></span>
     </h4>
-    <button class="add-btn" onclick="openEquipmentModal('add')">➕ Add Equipment</button>
+    <button class="add-btn" onclick="openEquipmentModal('add')">Add Equipment</button>
 </div>
 
 <!-- Equipment Table -->
@@ -69,7 +69,7 @@ $site_types = getAllSiteTypes();
             </td>
             <td>
                 <span class="net-cat-badge net-cat-<?php echo $row['equipment_category']; ?>">
-                    <?php echo $row['equipment_category'] === 'equipment' ? '🖥️ Equipment' : '🔌 Modules'; ?>
+                    <?php echo $row['equipment_category'] === 'equipment' ? 'Equipment' : 'Modules'; ?>
                 </span>
             </td>
             <td><strong><?php echo htmlspecialchars($row['item_name']); ?></strong></td>
@@ -77,8 +77,8 @@ $site_types = getAllSiteTypes();
             <td><?php echo $row['default_quantity']; ?></td>
             <td><span class="price-badge"><?php echo formatPrice($row['unit_price']); ?></span></td>
             <td>
-                <button class="btn-edit" onclick='editEquipment(<?php echo json_encode($row); ?>)'>✏️ Edit</button>
-                <button class="btn-delete" onclick="deleteEquipment(<?php echo $row['id']; ?>)">🗑️ Delete</button>
+                <button class="btn-edit" onclick='editEquipment(<?php echo json_encode($row); ?>)'>Edit</button>
+                <button class="btn-delete" onclick="deleteEquipment(<?php echo $row['id']; ?>)">Delete</button>
             </td>
         </tr>
         <?php endforeach; ?>
@@ -323,8 +323,8 @@ function addEquipmentRow(id, formData) {
                 item_description: formData.get('description'),
                 default_quantity: formData.get('quantity'),
                 unit_price: formData.get('price')
-            })})'>✏️ Edit</button>
-            <button class="btn-delete" onclick="deleteEquipment(${id})">🗑️ Delete</button>
+            })})'>Edit</button>
+            <button class="btn-delete" onclick="deleteEquipment(${id})">Delete</button>
         </td>
     `;
     
@@ -352,7 +352,7 @@ function removeEquipmentRow(id) {
 <!-- Delete Confirm Modal -->
 <div id="net-eq-delete-modal" class="modal">
     <div class="modal-content" style="max-width:420px; text-align:center;">
-        <div style="font-size:3rem; margin-bottom:1rem;">🗑️</div>
+        <div style="font-size:3rem; margin-bottom:1rem;"></div>
         <h3 style="color:#dc3545; margin-bottom:.75rem;">Delete Item?</h3>
         <p style="color:#666; margin-bottom:1.5rem;" id="net-eq-delete-text">This will permanently remove the item.</p>
         <div style="display:flex; gap:1rem; justify-content:center;">

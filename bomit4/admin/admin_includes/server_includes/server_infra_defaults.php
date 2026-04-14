@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_defaults'])) {
     </table>
     <div style="margin-top:1.5rem;">
         <button type="submit" class="btn-save" style="padding:.75rem 2.5rem;">
-            💾 Save Defaults
+            Save Defaults
         </button>
     </div>
 </form>

@@ -46,8 +46,8 @@
 <div id="srv-alert-message" style="display:none; margin-bottom:1rem;"></div>
 
 <div class="management-tabs">
-    <button class="tab-btn active" onclick="accSwitchTab('accounts', event)">👤 All Accounts</button>
-    <button class="tab-btn"        onclick="accSwitchTab('create',   event)">➕ Create Account</button>
+    <button class="tab-btn active" onclick="accSwitchTab('accounts', event)">All Accounts</button>
+    <button class="tab-btn"        onclick="accSwitchTab('create',   event)">Create Account</button>
 </div>
 
 <!-- Tab: All Accounts -->

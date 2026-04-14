@@ -322,7 +322,7 @@ if (!empty($project_name)) {
     <!-- ── Page Header ───────────────────────────────────────────────────── -->
     <div class="srv-header">
         <div>
-            <h2>🖥️ Server Infrastructure Summary</h2>
+            <h2>Server Infrastructure Summary</h2>
             <p>Review your server configuration and computed sizing results</p>
         </div>
         <?php if ($save_message === 'success'): ?>
@@ -338,7 +338,7 @@ if (!empty($project_name)) {
 
     <!-- ── 1. Project Info ───────────────────────────────────────────────── -->
     <div class="srv-section">
-        <div class="srv-section-title">📋 Project Information</div>
+        <div class="srv-section-title">Project Information</div>
         <div class="metric-grid" style="margin-top:1rem;">
             <?php
             $proj_fields = [
@@ -360,7 +360,7 @@ if (!empty($project_name)) {
 
     <!-- ── 2. VM & Infrastructure Table ─────────────────────────────────── -->
     <div class="srv-section">
-        <div class="srv-section-title">🖥️ VM & Infrastructure</div>
+        <div class="srv-section-title">VM & Infrastructure</div>
         <p class="srv-section-sub">Overview of core infrastructure, project requirement VMs, memory, and storage allocation.</p>
         <table class="srv-table">
             <thead>
@@ -400,7 +400,7 @@ if (!empty($project_name)) {
 
     <!-- ── 3. Compute Sizing ─────────────────────────────────────────────── -->
     <div class="srv-section">
-        <div class="srv-section-title">⚙️ Compute Sizing</div>
+        <div class="srv-section-title">Compute Sizing</div>
         <p class="srv-section-sub">Computed future requirements based on growth factors.</p>
 
         <!-- Row 1: Current + Future Needs -->
@@ -436,7 +436,7 @@ if (!empty($project_name)) {
 
     <!-- ── 4. Storage Sizing ─────────────────────────────────────────────── -->
     <div class="srv-section">
-        <div class="srv-section-title">💾 Storage Sizing</div>
+        <div class="srv-section-title">Storage Sizing</div>
         <p class="srv-section-sub">Current versus projected storage requirements.</p>
         <div class="metric-grid">
             <div class="metric-card"><div class="metric-label">Current Requirements (TB)</div><div class="metric-value"><?php echo round($current_requirements, 2); ?></div></div>
@@ -447,7 +447,7 @@ if (!empty($project_name)) {
 
     <!-- ── 5. Repository Sizing ──────────────────────────────────────────── -->
     <div class="srv-section">
-        <div class="srv-section-title">📦 Repository Sizing</div>
+        <div class="srv-section-title">Repository Sizing</div>
         <p class="srv-section-sub">Backup repository sizing based on source data and project duration.</p>
         <div class="metric-grid">
             <div class="metric-card"><div class="metric-label">Source Data (TB)</div><div class="metric-value"><?php echo round($current_requirements, 2); ?></div></div>
@@ -457,7 +457,7 @@ if (!empty($project_name)) {
 
     <!-- ── 6. Data Domain Sizing ─────────────────────────────────────────── -->
     <div class="srv-section">
-        <div class="srv-section-title">🗄️ Data Domain Sizing</div>
+        <div class="srv-section-title">Data Domain Sizing</div>
         <p class="srv-section-sub">Recommended Dell EMC Data Domain appliance for backup storage.</p>
         <div class="metric-grid">
             <div class="metric-card"><div class="metric-label">Logical Size (TB)</div><div class="metric-value"><?php echo $total_logical; ?></div></div>
@@ -472,21 +472,17 @@ if (!empty($project_name)) {
 
     <!-- ── Action Buttons ────────────────────────────────────────────────── -->
     <div class="srv-actions">
-        <button class="srv-btn srv-btn-back" onclick="history.back()">
+        <button class="srv-btn srv-btn-back" onclick="window.location.href='guest_home.php'">
             ← Back to Configuration
         </button>
         <button class="srv-btn srv-btn-save" onclick="serverSaveConfig()">
-            💾 Save Configuration
+            Save Configuration
         </button>
         <button class="srv-btn srv-btn-pdf" onclick="serverExportPDF(true)">
-            💰 Export PDF (With Prices)
+            Export PDF (With Prices)
         </button>
         <button class="srv-btn srv-btn-no-price" onclick="serverExportPDF(false)">
-            📄 Export PDF (No Prices)
-        </button>
-        <button class="srv-btn" onclick="exportServerExcel(window.serverSummaryData)"
-            style="flex:1; background:linear-gradient(90deg,#217346,#1a5c38); color:white; justify-content:center;">
-            📊 Export Excel
+            Export PDF (No Prices)
         </button>
     </div>
 

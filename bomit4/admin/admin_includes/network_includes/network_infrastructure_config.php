@@ -28,7 +28,7 @@ requireAdminAuth($conn);
 <!-- Action Bar -->
 <div class="action-bar">
     <h4>Infrastructure Configuration Items</h4>
-    <button class="add-btn" onclick="openConfigModal('add')">➕ Add Config Item</button>
+    <button class="add-btn" onclick="openConfigModal('add')">Add Config Item</button>
 </div>
 
 <!-- Config Table -->
@@ -66,8 +66,8 @@ requireAdminAuth($conn);
             </td>
             <td><?php echo $row['parent_item'] ? htmlspecialchars($row['parent_item']) : '<span style="color: #999;">-</span>'; ?></td>
             <td>
-                <button class="btn-edit" onclick='editConfig(<?php echo json_encode($row); ?>)'>✏️ Edit</button>
-                <button class="btn-delete" onclick="deleteConfig(<?php echo $row['id']; ?>)">🗑️ Delete</button>
+                <button class="btn-edit" onclick='editConfig(<?php echo json_encode($row); ?>)'>Edit</button>
+                <button class="btn-delete" onclick="deleteConfig(<?php echo $row['id']; ?>)">Delete</button>
             </td>
         </tr>
         <?php endforeach; ?>

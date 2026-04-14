@@ -98,35 +98,10 @@ async function autoLoadConfiguration() {
             const savedUserQty = result.configuration?.project_info?.user_quantity;
             
             if (currentUserQty && savedUserQty && currentUserQty !== savedUserQty) {
-                // User quantity changed - show confirmation
-                const confirmed = confirm(
-                    `⚠️ NUMBER OF USERS CHANGED\n\n` +
-                    `From: ${savedUserQty}\n` +
-                    `To: ${currentUserQty}\n\n` +
-                    `WHAT WILL HAPPEN:\n\n` +
-                    `✅ PRESERVED:\n` +
-                    `   • Network configuration (Internet, WAN, VSAT)\n` +
-                    `   • Cables & accessories\n` +
-                    `   • Additional notes\n\n` +
-                    `🔄 RESET TO DEFAULT:\n` +
-                    `   • Equipment selection (site type changed)\n\n` +
-                    `Continue loading saved configuration?`
-                );
-                
-                if (confirmed) {
-                    // User clicked OK - use NEW user quantity from session
-                    populateForm(result.configuration, true); // true = user qty changed
-                    showInfoMessage(`✅ Configuration loaded. Equipment reset for "${currentUserQty}".`);
-                    hasUnsavedChanges = false;
-                } else {
-                    // User clicked Cancel - keep OLD saved configuration
-                    console.log('❌ User cancelled - loading saved configuration with old user quantity');
-                    showInfoMessage(`❌ Load cancelled. Using saved configuration with "${savedUserQty}".`);
-                    
-                    // Load the saved configuration normally (will include old user quantity)
-                    populateForm(result.configuration, false);
-                    hasUnsavedChanges = false;
-                }
+                // User quantity changed — load silently with new quantity, no popup
+                populateForm(result.configuration, true);
+                showInfoMessage(`✅ Configuration loaded. Equipment updated for "${currentUserQty}".`);
+                hasUnsavedChanges = false;
             } else {
                 // No change - load normally
                 populateForm(result.configuration, false);

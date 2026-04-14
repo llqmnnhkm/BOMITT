@@ -11,8 +11,8 @@ requireAdminAuth($conn);
 $site_types = getAllSiteTypes(); // from admin_utilities.php
 
 $net_categories = [
-    'equipment' => '🖥️ Equipment',
-    'modules'   => '🔌 Modules',
+    'equipment' => 'Equipment',
+    'modules'   => 'Modules',
 ];
 
 // Fetch all active equipment
@@ -55,32 +55,32 @@ $total_equipment_value = array_sum(array_column($stats, 'total_value'));
 ?>
 
 <div style="margin-bottom:1.5rem;">
-    <h4 style="color:#333; margin-bottom:.5rem;">📋 Network Infrastructure Overview</h4>
+    <h4 style="color:#333; margin-bottom:.5rem;">Network Infrastructure Overview</h4>
     <p style="color:#666; font-size:.875rem;">Read-only summary of all network items. Use the other tabs to add or edit.</p>
 </div>
 
 <!-- ── Top Summary Cards ────────────────────────────────────────────────── -->
 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:2rem;">
     <div style="background:#e3f2fd; border-left:4px solid #1565c0; padding:1rem; border-radius:10px;">
-        <div style="font-size:1.5rem;">🌐</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700; color:#1565c0; margin:4px 0;">Equipment Items</div>
         <div style="font-size:1.8rem; font-weight:800; color:#1565c0;"><?php echo $total_equipment_items; ?></div>
         <div style="font-size:.8rem; color:#555;">across <?php echo count($site_types); ?> site types</div>
     </div>
     <div style="background:#e8f5e9; border-left:4px solid #2e7d32; padding:1rem; border-radius:10px;">
-        <div style="font-size:1.5rem;">⚙️</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700; color:#2e7d32; margin:4px 0;">Infrastructure Configs</div>
         <div style="font-size:1.8rem; font-weight:800; color:#2e7d32;"><?php echo $config_total; ?></div>
         <div style="font-size:.8rem; color:#555;">internet, WAN, VSAT options</div>
     </div>
     <div style="background:#fff3e0; border-left:4px solid #e65100; padding:1rem; border-radius:10px;">
-        <div style="font-size:1.5rem;">🔌</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700; color:#e65100; margin:4px 0;">Cables & Accessories</div>
         <div style="font-size:1.8rem; font-weight:800; color:#e65100;"><?php echo $cables_total; ?></div>
         <div style="font-size:.8rem; color:#555;">cables, patch panels, accessories</div>
     </div>
     <div style="background:linear-gradient(135deg,#e3f2fd,#e8f5e9); border-left:4px solid #0070ef; padding:1rem; border-radius:10px;">
-        <div style="font-size:1.5rem;">💰</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700; color:#0070ef; margin:4px 0;">Est. Equipment Value</div>
         <div style="font-size:1.4rem; font-weight:800; color:#0070ef;">$<?php echo number_format($total_equipment_value, 2); ?></div>
         <div style="font-size:.8rem; color:#555;">default qty × unit price</div>
@@ -99,11 +99,11 @@ $site_groups = [
 ];
 
 $group_colors = [
-    'Less than 50 Users'  => ['color'=>'#2e7d32', 'bg'=>'#e8f5e9', 'emoji'=>'🏠'],
-    '51–150 Users'        => ['color'=>'#1565c0', 'bg'=>'#e3f2fd', 'emoji'=>'🏢'],
-    '151–300 Users'       => ['color'=>'#6a1b9a', 'bg'=>'#f3e5f5', 'emoji'=>'🏬'],
-    '301–400 Users'       => ['color'=>'#e65100', 'bg'=>'#fff3e0', 'emoji'=>'🏭'],
-    'More than 400 Users' => ['color'=>'#880e4f', 'bg'=>'#fce4ec', 'emoji'=>'🌆'],
+    'Less than 50 Users'  => ['color'=>'#2e7d32', 'bg'=>'#e8f5e9', 'emoji'=>''],
+    '51–150 Users'        => ['color'=>'#1565c0', 'bg'=>'#e3f2fd', 'emoji'=>''],
+    '151–300 Users'       => ['color'=>'#6a1b9a', 'bg'=>'#f3e5f5', 'emoji'=>''],
+    '301–400 Users'       => ['color'=>'#e65100', 'bg'=>'#fff3e0', 'emoji'=>''],
+    'More than 400 Users' => ['color'=>'#880e4f', 'bg'=>'#fce4ec', 'emoji'=>''],
 ];
 
 foreach ($site_groups as $group_label => $group_keys):

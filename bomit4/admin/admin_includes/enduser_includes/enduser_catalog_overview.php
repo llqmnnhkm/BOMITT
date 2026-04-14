@@ -16,10 +16,10 @@ $eu_user_types = [
     'executive' => ['label'=>'Executive / VIP',  'emoji'=>'💼', 'color'=>'#4527a0', 'bg'=>'#ede7f6'],
 ];
 $eu_categories = [
-    'workstation' => '🖥️ Workstation Equipment',
-    'peripherals' => '🖱️ Peripherals & Accessories',
-    'mobile'      => '📱 Mobile & Communications',
-    'software'    => '💿 Software & Licenses',
+    'workstation' => 'Workstation Equipment',
+    'peripherals' => 'Peripherals & Accessories',
+    'mobile'      => 'Mobile & Communications',
+    'software'    => 'Software & Licenses',
 ];
 
 // Fetch all active items grouped (safe — table may not exist yet)
@@ -66,7 +66,7 @@ foreach ($catalog as $ut => $cats) {
 <?php endif; ?>
 
 <div style="margin-bottom:1.5rem;">
-    <h4 style="color:#333; margin-bottom:0.5rem;">📋 Catalog Overview</h4>
+    <h4 style="color:#333; margin-bottom:0.5rem;">Catalog Overview</h4>
     <p style="color:#666; font-size:0.875rem;">
         Read-only summary of all equipment items grouped by user type.
         Use the <strong>Equipment Items</strong> tab to add or edit items.
@@ -110,7 +110,7 @@ foreach ($catalog as $ut => $cats) {
         <div style="margin-left:auto;">
             <button class="add-btn" style="font-size:0.8rem; padding:6px 12px;"
                 onclick='euOpenItemModal("add"); document.getElementById("eu-item-user-type").value="<?php echo $ut_key; ?>"'>
-                ➕ Add Item
+                Add Item
             </button>
         </div>
     </div>

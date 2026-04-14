@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check account is active
         if (isset($user['is_active']) && $user['is_active'] == 0) {
-            $error_message = "Your account has been deactivated. Please contact your administrator.";
+            $error_message = "Your account has been deactivated. Please contact your administrator (Mr Saiful Yusof).";
         }
         // Verify password
         elseif (password_verify($user_pw, $user['user_pw'])) {

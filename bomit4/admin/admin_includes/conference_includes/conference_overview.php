@@ -8,15 +8,15 @@ require_once dirname(__DIR__) . '/admin_utilities.php';
 requireAdminAuth($conn);
 
 $conf_room_types = [
-    'small'  => ['label'=>'Small Room (4–6 people)',    'emoji'=>'🪑', 'color'=>'#2e7d32', 'bg'=>'#e8f5e9'],
-    'medium' => ['label'=>'Medium Room (8–12 people)', 'emoji'=>'👥', 'color'=>'#1565c0', 'bg'=>'#e3f2fd'],
-    'large'  => ['label'=>'Large Room (15+ people)',   'emoji'=>'🏛️', 'color'=>'#4527a0', 'bg'=>'#ede7f6'],
+    'small'  => ['label'=>'Small Room (4–6 people)',    'emoji'=>'', 'color'=>'#2e7d32', 'bg'=>'#e8f5e9'],
+    'medium' => ['label'=>'Medium Room (8–12 people)', 'emoji'=>'', 'color'=>'#1565c0', 'bg'=>'#e3f2fd'],
+    'large'  => ['label'=>'Large Room (15+ people)',   'emoji'=>'', 'color'=>'#4527a0', 'bg'=>'#ede7f6'],
 ];
 $conf_categories = [
-    'av'           => '🎥 AV Equipment',
-    'connectivity' => '🔌 Connectivity',
-    'furniture'    => '🪑 Furniture',
-    'other'        => '📦 Other',
+    'av'           => 'AV Equipment',
+    'connectivity' => 'Connectivity',
+    'furniture'    => 'Furniture',
+    'other'        => 'Other',
 ];
 
 $catalog = [];
@@ -44,7 +44,7 @@ foreach ($catalog as $rt => $cats) {
 
 <div style="margin-bottom:1.5rem;">
     <h4 style="color:#333; margin-bottom:.5rem;">
-        📋 Room Equipment Overview
+        Room Equipment Overview
         <span id="conf-overview-total-badge" style="font-size:.85rem; font-weight:400; color:#888; margin-left:.5rem;">
             (<?php echo array_sum(array_map(function($c){ return $c['total_items']; }, $stats)); ?> total items)
         </span>
@@ -84,7 +84,7 @@ foreach ($catalog as $rt => $cats) {
         <div style="margin-left:auto;">
             <button class="add-btn" style="font-size:.8rem; padding:6px 12px;"
                 onclick='confSwitchToItemsAndAdd("<?php echo $rt_key; ?>")'>
-                ➕ Add Item
+                Add Item
             </button>
         </div>
     </div>

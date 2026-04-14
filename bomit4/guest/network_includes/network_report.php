@@ -69,7 +69,7 @@
                 <!-- ✅ ADD: Separate Installation Services Display -->
                 <div id="report-installation-services" style="margin-top: 15px; display: none;">
                     <h4 style="font-size: 1rem; font-weight: 600; color: #388e3c; margin-bottom: 10px; padding-left: 10px; border-left: 4px solid #4caf50;">
-                        📦 Installation Services Included
+                         Installation Services Included
                     </h4>
                     <div id="installation-services-list" class="content-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f4 100%);">
                         <!-- Populated by JavaScript -->
@@ -166,17 +166,13 @@
             <!-- Action Buttons -->
             <div class="action-buttons">
                 <button onclick="exportNetworkPDFWithPrices()" class="btn btn-export-with-price">
-                    💰 Export PDF (With Prices)
+                     Export PDF (With Prices)
                 </button>
                 <button onclick="exportNetworkPDFNoPrices()" class="btn btn-export-no-price">
-                    📄 Export PDF (Without Prices)
-                </button>
-                <button onclick="exportNetworkExcel()" class="btn btn-export-excel"
-                    style="background:linear-gradient(90deg,#217346,#1a5c38);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:Montserrat,sans-serif;font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:8px;">
-                    📊 Export Excel
+                     Export PDF (Without Prices)
                 </button>
                 <button onclick="printNetworkReport()" class="btn btn-print">
-                    🖨️ Print Report
+                     Print Report
                 </button>
                 <button onclick="closeNetworkReport()" class="btn btn-close">
                     ✕ Close

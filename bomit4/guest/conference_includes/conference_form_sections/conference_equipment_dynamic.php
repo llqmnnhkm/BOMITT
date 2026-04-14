@@ -8,7 +8,57 @@ $conf_room_sizes = [
     'large'  => 'Large (15+ people)',
 ];
 
+// Color palette per room size
+$conf_room_colors = [
+    'small'  => [
+        'label_bg'       => '#e3f2fd',   // light blue
+        'label_border'   => '#1565c0',
+        'label_color'    => '#1565c0',
+        'av_bg'          => '#e3f2fd',
+        'av_border'      => '#1976d2',
+        'av_thead'       => 'linear-gradient(90deg, #1976d2 0%, #1565c0 100%)',
+        'av_total_color' => '#1565c0',
+        'conn_bg'        => '#e8eaf6',
+        'conn_border'    => '#3949ab',
+        'conn_thead'     => 'linear-gradient(90deg, #3949ab 0%, #283593 100%)',
+        'conn_total_color'=> '#283593',
+        'grand_bg'       => 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+        'emoji'          => '',
+    ],
+    'medium' => [
+        'label_bg'       => '#e8f5e9',   // green
+        'label_border'   => '#2e7d32',
+        'label_color'    => '#2e7d32',
+        'av_bg'          => '#e8f5e9',
+        'av_border'      => '#43a047',
+        'av_thead'       => 'linear-gradient(90deg, #43a047 0%, #2e7d32 100%)',
+        'av_total_color' => '#2e7d32',
+        'conn_bg'        => '#f1f8e9',
+        'conn_border'    => '#7cb342',
+        'conn_thead'     => 'linear-gradient(90deg, #7cb342 0%, #558b2f 100%)',
+        'conn_total_color'=> '#558b2f',
+        'grand_bg'       => 'linear-gradient(135deg, #43a047 0%, #2e7d32 100%)',
+        'emoji'          => '',
+    ],
+    'large'  => [
+        'label_bg'       => '#f3e5f5',   // purple
+        'label_border'   => '#6a1b9a',
+        'label_color'    => '#6a1b9a',
+        'av_bg'          => '#f3e5f5',
+        'av_border'      => '#8e24aa',
+        'av_thead'       => 'linear-gradient(90deg, #8e24aa 0%, #6a1b9a 100%)',
+        'av_total_color' => '#6a1b9a',
+        'conn_bg'        => '#f3e5f5',
+        'conn_border'    => '#6a1b9a',
+        'conn_thead'     => 'linear-gradient(90deg, #8e24aa 0%, #6a1b9a 100%)',
+        'conn_total_color'=> '#6a1b9a',
+        'grand_bg'       => 'linear-gradient(135deg, #8e24aa 0%, #6a1b9a 100%)',
+        'emoji'          => '',
+    ],
+];
+
 foreach ($conf_room_sizes as $room_size_code => $room_size_label):
+    $rc = $conf_room_colors[$room_size_code];
 
     // Fetch AV + other items for this room size
     $equip_query = "SELECT * FROM conference_equipment 
@@ -36,21 +86,30 @@ foreach ($conf_room_sizes as $room_size_code => $room_size_label):
 
 <div id="<?php echo $section_id; ?>" class="conf-size-section hidden">
     <div class="question-group" style="margin-bottom: 2rem;">
-        <label style="font-size: 1.125rem; font-weight: 600; display:block; margin-bottom: 0.25rem;">
-            Equipment: <?php echo htmlspecialchars($room_size_label); ?>
-        </label>
-        <p style="font-size: 0.875rem; color: #666; margin: 0 0 1rem 0;">
-            Recommended equipment for a <?php echo strtolower($room_size_label); ?> conference room. Adjust quantities as needed.
-        </p>
+        <!-- Room size header badge -->
+        <div style="background:<?php echo $rc['label_bg']; ?>; border-left:5px solid <?php echo $rc['label_border']; ?>;
+                    border-radius:10px; padding:14px 20px; margin-bottom:1.25rem;
+                    display:flex; align-items:center; gap:12px;">
+            <span style="font-size:1.8rem;"><?php echo $rc['emoji']; ?></span>
+            <div>
+                <div style="font-weight:700; font-size:1.1rem; color:<?php echo $rc['label_color']; ?>;">
+                    Equipment: <?php echo htmlspecialchars($room_size_label); ?>
+                </div>
+                <div style="font-size:0.875rem; color:#666; margin-top:2px;">
+                    Recommended equipment for a <?php echo strtolower($room_size_label); ?> conference room. Adjust quantities as needed.
+                </div>
+            </div>
+        </div>
 
         <?php if ($equip_result->num_rows > 0): ?>
         <!-- AV / General Equipment Table -->
         <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; padding: 8px 12px;
-                   background: #e8f5e9; border-left: 4px solid #80c7a0; border-radius: 4px;">
-            🎬 AV & Room Equipment
+                   background: <?php echo $rc['av_bg']; ?>; border-left: 4px solid <?php echo $rc['av_border']; ?>; border-radius: 4px;
+                   color: <?php echo $rc['av_total_color']; ?>;">
+             AV & Room Equipment
         </h4>
         <table style="width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem;">
-            <thead style="background: linear-gradient(90deg, #80c7a0 0%, #4caf50 100%); color:white;">
+            <thead style="background: <?php echo $rc['av_thead']; ?>; color:white;">
                 <tr>
                     <th style="padding:12px; text-align:left;">Equipment Description</th>
                     <th style="padding:12px; text-align:center; width:100px;">Quantity</th>
@@ -81,7 +140,7 @@ foreach ($conf_room_sizes as $room_size_code => $room_size_label):
                     <td style="padding:12px; text-align:right; color:#666;">
                         $<?php echo number_format($item['unit_price'], 2); ?>
                     </td>
-                    <td class="conf-row-total" style="padding:12px; text-align:right; font-weight:bold; color:#80c7a0;">
+                    <td class="conf-row-total" style="padding:12px; text-align:right; font-weight:bold; color:<?php echo $rc['av_total_color']; ?>;">
                         $<?php echo number_format($row_total, 2); ?>
                     </td>
                 </tr>
@@ -93,11 +152,12 @@ foreach ($conf_room_sizes as $room_size_code => $room_size_label):
         <?php if ($conn_result->num_rows > 0): ?>
         <!-- Connectivity Table -->
         <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; padding: 8px 12px;
-                   background: #e3f2fd; border-left: 4px solid #2196F3; border-radius: 4px;">
-            🔌 Connectivity Equipment
+                   background: <?php echo $rc['conn_bg']; ?>; border-left: 4px solid <?php echo $rc['conn_border']; ?>; border-radius: 4px;
+                   color: <?php echo $rc['conn_total_color']; ?>;">
+             Connectivity Equipment
         </h4>
         <table style="width:100%; border-collapse:collapse; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-bottom:1.5rem;">
-            <thead style="background: linear-gradient(90deg, #2196F3 0%, #0070ef 100%); color:white;">
+            <thead style="background: <?php echo $rc['conn_thead']; ?>; color:white;">
                 <tr>
                     <th style="padding:12px; text-align:left;">Connectivity Item</th>
                     <th style="padding:12px; text-align:center; width:100px;">Quantity</th>
@@ -128,7 +188,7 @@ foreach ($conf_room_sizes as $room_size_code => $room_size_label):
                     <td style="padding:12px; text-align:right; color:#666;">
                         $<?php echo number_format($item['unit_price'], 2); ?>
                     </td>
-                    <td class="conf-row-total" style="padding:12px; text-align:right; font-weight:bold; color:#0070ef;">
+                    <td class="conf-row-total" style="padding:12px; text-align:right; font-weight:bold; color:<?php echo $rc['conn_total_color']; ?>;">
                         $<?php echo number_format($row_total, 2); ?>
                     </td>
                 </tr>
@@ -138,7 +198,7 @@ foreach ($conf_room_sizes as $room_size_code => $room_size_label):
         <?php endif; ?>
 
         <!-- Grand Total -->
-        <div style="background: linear-gradient(135deg, #80c7a0 0%, #0070ef 100%); padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+        <div style="background: <?php echo $rc['grand_bg']; ?>; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div style="color:white; font-size:1.2rem; font-weight:bold;">Total Equipment & Connectivity:</div>
                 <div id="<?php echo $total_id; ?>" style="color:white; font-size:1.5rem; font-weight:bold;">$0.00</div>

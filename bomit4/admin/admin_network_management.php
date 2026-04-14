@@ -9,10 +9,10 @@
 
 <!-- Management Tabs -->
 <div class="management-tabs">
-    <button class="tab-btn active" onclick="netSwitchTab('equipment', event)">🌐 Equipment Items</button>
-    <button class="tab-btn"        onclick="netSwitchTab('config',    event)">⚙️ Infrastructure Config</button>
-    <button class="tab-btn"        onclick="netSwitchTab('cables',    event)">🔌 Cables & Accessories</button>
-    <button class="tab-btn"        onclick="netSwitchTab('overview',  event)">📋 Overview</button>
+    <button class="tab-btn active" onclick="netSwitchTab('equipment', event)">Equipment Items</button>
+    <button class="tab-btn"        onclick="netSwitchTab('config',    event)">Infrastructure Config</button>
+    <button class="tab-btn"        onclick="netSwitchTab('cables',    event)">Cables & Accessories</button>
+    <button class="tab-btn"        onclick="netSwitchTab('overview',  event)">Overview</button>
 </div>
 
 <!-- Tab: Equipment -->

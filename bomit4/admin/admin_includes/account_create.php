@@ -13,7 +13,7 @@ $creator = $_SESSION['user_id'];
 <div style="max-width:680px;">
     <div style="background:linear-gradient(135deg,#e3f2fd,#f3e5f5);padding:16px 20px;border-radius:12px;
                 margin-bottom:1.5rem;border-left:4px solid #0070ef;">
-        <div style="font-weight:700;color:#0070ef;margin-bottom:4px;">👤 Create New Account</div>
+        <div style="font-weight:700;color:#0070ef;margin-bottom:4px;">Create New Account</div>
         <div style="font-size:.875rem;color:#666;">
             New accounts are created as <strong>Guest (IT Project Manager)</strong> by default.
             The user will be required to change their password on first login.
@@ -78,8 +78,8 @@ $creator = $_SESSION['user_id'];
             <div class="form-group">
                 <label>Role</label>
                 <select name="role" id="acc-c-role" style="width:100%;">
-                    <option value="guest" selected>👤 Guest (IT Project Manager)</option>
-                    <option value="admin">🔐 Admin</option>
+                    <option value="guest" selected>Guest (IT Project Manager)</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
         </div>
@@ -204,7 +204,7 @@ function accCheckPwMatch() {
 function accTogglePw(inputId, btn) {
     const inp = document.getElementById(inputId);
     inp.type  = inp.type === 'password' ? 'text' : 'password';
-    btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+    btn.textContent = inp.type === 'password' ? '👁' : '';
 }
 
 function accResetCreate() {

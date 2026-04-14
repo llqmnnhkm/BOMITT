@@ -8,9 +8,9 @@ require_once dirname(__DIR__) . '/admin_utilities.php';
 requireAdminAuth($conn);
 
 $srv_types = [
-    'core_infra'  => ['label'=>'Core Infrastructure', 'emoji'=>'⚙️','color'=>'#1565c0','bg'=>'#e3f2fd'],
-    'project_req' => ['label'=>'Project Requirement',  'emoji'=>'📁','color'=>'#e65100','bg'=>'#fff3e0'],
-    'application' => ['label'=>'Application Servers',  'emoji'=>'💻','color'=>'#2e7d32','bg'=>'#e8f5e9'],
+    'core_infra'  => ['label'=>'Core Infrastructure', 'emoji'=>'','color'=>'#1565c0','bg'=>'#e3f2fd'],
+    'project_req' => ['label'=>'Project Requirement',  'emoji'=>'','color'=>'#e65100','bg'=>'#fff3e0'],
+    'application' => ['label'=>'Application Servers',  'emoji'=>'','color'=>'#2e7d32','bg'=>'#e8f5e9'],
 ];
 
 $catalog = [];
@@ -35,29 +35,29 @@ foreach ($catalog as $items) {
 ?>
 
 <div style="margin-bottom:1.5rem;">
-    <h4 style="color:#333;margin-bottom:.5rem;">📋 Server Equipment Overview</h4>
+    <h4 style="color:#333;margin-bottom:.5rem;">Server Equipment Overview</h4>
     <p style="color:#666;font-size:.875rem;">Read-only. Use <strong>VM Items</strong> tab to add or edit.</p>
 </div>
 
 <!-- Summary stat cards -->
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem;">
     <div style="background:#e3f2fd;border-left:4px solid #1565c0;padding:1rem;border-radius:10px;">
-        <div style="font-size:1.5rem;">🖥️</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700;color:#1565c0;margin:4px 0;">Total VM Items</div>
         <div style="font-size:1.8rem;font-weight:800;color:#1565c0;"><?php echo $totals['items']; ?></div>
     </div>
     <div style="background:#e8f5e9;border-left:4px solid #2e7d32;padding:1rem;border-radius:10px;">
-        <div style="font-size:1.5rem;">⚙️</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700;color:#2e7d32;margin:4px 0;">Total Cores</div>
         <div style="font-size:1.8rem;font-weight:800;color:#2e7d32;"><?php echo $totals['cores']; ?></div>
     </div>
     <div style="background:#fff3e0;border-left:4px solid #e65100;padding:1rem;border-radius:10px;">
-        <div style="font-size:1.5rem;">💾</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700;color:#e65100;margin:4px 0;">Total Memory (GB)</div>
         <div style="font-size:1.8rem;font-weight:800;color:#e65100;"><?php echo $totals['memory']; ?></div>
     </div>
     <div style="background:#ede7f6;border-left:4px solid #4527a0;padding:1rem;border-radius:10px;">
-        <div style="font-size:1.5rem;">🗄️</div>
+        <div style="font-size:1.5rem;"></div>
         <div style="font-weight:700;color:#4527a0;margin:4px 0;">Total Data Storage (GB)</div>
         <div style="font-size:1.8rem;font-weight:800;color:#4527a0;"><?php echo number_format($totals['data']); ?></div>
     </div>

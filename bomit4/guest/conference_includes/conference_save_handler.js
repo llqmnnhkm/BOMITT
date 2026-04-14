@@ -50,35 +50,64 @@ function confPopulateForm(config) {
     if (!config) return;
     console.log('📥 Populating conference form');
 
-    // Room info
+    // Room info — restore multi-room state (confRoomState)
     if (config.room_info) {
         const ri = config.room_info;
-        if (ri.conference_size) {
-            const radio = document.querySelector(`input[name="conference_size"][value="${ri.conference_size}"]`);
-            if (radio) { radio.checked = true; onRoomSizeChange(); }
-        }
-        if (ri.conference_meeting_type) {
-            const radio = document.querySelector(`input[name="conference_meeting_type"][value="${ri.conference_meeting_type}"]`);
-            if (radio) {
-                radio.checked = true;
-                const card = radio.nextElementSibling;
-                if (card) {
-                    card.style.borderColor = '#80c7a0';
-                    card.style.background  = 'rgba(128,199,160,0.1)';
+
+        // Restore new multi-room state
+        if (ri.room_state && typeof confToggleRoom === 'function') {
+            // ri.room_state = { small: 2, medium: 1, large: 0 }
+            Object.entries(ri.room_state).forEach(([size, qty]) => {
+                if (qty > 0) {
+                    // Select the card
+                    window.confRoomState = window.confRoomState || { small:0, medium:0, large:0 };
+                    window.confRoomState[size] = qty;
+
+                    // Update card UI
+                    const card    = document.getElementById('conf-card-' + size);
+                    const qtyWrap = document.getElementById('conf-qty-wrap-' + size);
+                    const qtyInp  = document.getElementById('conf-qty-' + size);
+                    if (card)    { card.classList.add('selected'); card.style.borderColor = '#4caf50'; }
+                    if (qtyWrap) qtyWrap.style.display = 'block';
+                    if (qtyInp)  qtyInp.value = qty;
                 }
-            }
+            });
+            // Apply multipliers and show sections
+            if (typeof confUpdateAll === 'function') confUpdateAll();
         }
-        if (ri.conference_setup_type) {
-            const radio = document.querySelector(`input[name="conference_setup_type"][value="${ri.conference_setup_type}"]`);
-            if (radio) {
-                radio.checked = true;
-                const card = radio.nextElementSibling;
-                if (card) {
-                    card.style.borderColor = '#80c7a0';
-                    card.style.background  = 'rgba(128,199,160,0.1)';
+        // Legacy fallback: single room
+        else if (ri.conference_size && typeof confToggleRoom === 'function') {
+            window.confRoomState = { small:0, medium:0, large:0 };
+            window.confRoomState[ri.conference_size] = 1;
+            const card    = document.getElementById('conf-card-' + ri.conference_size);
+            const qtyWrap = document.getElementById('conf-qty-wrap-' + ri.conference_size);
+            const qtyInp  = document.getElementById('conf-qty-' + ri.conference_size);
+            if (card)    { card.classList.add('selected'); card.style.borderColor = '#4caf50'; }
+            if (qtyWrap) qtyWrap.style.display = 'block';
+            if (qtyInp)  qtyInp.value = 1;
+            if (typeof confUpdateAll === 'function') confUpdateAll();
+        }
+    }
+
+    // Restore individual equipment quantities after sections are shown
+    // Use setTimeout so DOM sections are visible first
+    if (config.equipment && Array.isArray(config.equipment)) {
+        setTimeout(() => {
+            config.equipment.forEach(item => {
+                const input = document.querySelector(`input[name="${item.name}"]`);
+                if (input) {
+                    input.value = item.quantity;
+                    // Also restore data-default-qty so multiplier works correctly
+                    if (item.default_qty) input.setAttribute('data-default-qty', item.default_qty);
                 }
-            }
-        }
+            });
+            // Recalc totals for all active sections
+            ['small','medium','large'].forEach(size => {
+                if ((window.confRoomState?.[size] || 0) > 0) {
+                    if (typeof calculateConferenceTotals === 'function') calculateConferenceTotals(size);
+                }
+            });
+        }, 300);
     }
 
     // AV & Connectivity
@@ -106,18 +135,7 @@ function confPopulateForm(config) {
         setCheck('av_network_required',av.network_required);
     }
 
-    // Equipment quantities
-    if (config.equipment && Array.isArray(config.equipment)) {
-        config.equipment.forEach(item => {
-            const input = document.querySelector(`input[name="${item.name}"]`);
-            if (input) input.value = item.quantity;
-        });
-        // Recalculate totals for visible section
-        const size = document.querySelector('input[name="conference_size"]:checked')?.value;
-        if (size && typeof calculateConferenceTotals === 'function') {
-            calculateConferenceTotals(size);
-        }
-    }
+    // Equipment quantities are restored in the room_info block above (with setTimeout)
 
     // Notes
     if (config.notes) {
@@ -165,10 +183,13 @@ function confCollectFormData() {
     fd.append('action', 'save_conference_config');
     fd.append('project_name', document.querySelector('input[name="project_name"]')?.value || '');
 
-    // Room info
-    fd.append('conference_size',         document.querySelector('input[name="conference_size"]:checked')?.value         || '');
-    fd.append('conference_meeting_type', document.querySelector('input[name="conference_meeting_type"]:checked')?.value || '');
-    fd.append('conference_setup_type',   document.querySelector('input[name="conference_setup_type"]:checked')?.value   || '');
+    // Room info — save multi-room state
+    const roomStateToSave = window.confRoomState || { small:0, medium:0, large:0 };
+    fd.append('room_state', JSON.stringify(roomStateToSave));
+    // Keep legacy fields for backward compat
+    fd.append('conference_size', Object.keys(roomStateToSave).find(k => roomStateToSave[k] > 0) || '');
+    fd.append('conference_meeting_type', '');
+    fd.append('conference_setup_type', '');
 
     // AV
     ['av_display_type','av_vc_platform','av_wireless_type','av_wired_drops','av_control_system','av_network_type'].forEach(name => {
@@ -178,19 +199,24 @@ function confCollectFormData() {
         if (document.querySelector(`input[name="${name}"]`)?.checked) fd.append(name, 'yes');
     });
 
-    // Equipment
+    // Equipment — collect from ALL active room sections
     const equipData = [];
-    const visibleSection = document.querySelector('.conf-size-section:not(.hidden)');
-    if (visibleSection) {
-        visibleSection.querySelectorAll('input[type="number"]').forEach(input => {
+    document.querySelectorAll('.conf-size-section:not(.hidden)').forEach(section => {
+        section.querySelectorAll('input[type="number"]').forEach(input => {
             const qty = parseFloat(input.value) || 0;
             if (qty > 0) {
                 const row      = input.closest('tr');
                 const itemName = row?.querySelector('td:first-child')?.textContent.trim() || '';
-                equipData.push({ name: input.name, item_description: itemName, quantity: qty, price: input.getAttribute('data-price') || '0' });
+                equipData.push({
+                    name: input.name,
+                    item_description: itemName,
+                    quantity: qty,
+                    price: input.getAttribute('data-price') || '0',
+                    default_qty: input.getAttribute('data-default-qty') || qty,
+                });
             }
         });
-    }
+    });
     fd.append('equipment_data', JSON.stringify(equipData));
 
     // Notes

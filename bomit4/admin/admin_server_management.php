@@ -10,9 +10,9 @@
 
 <!-- Management Tabs -->
 <div class="management-tabs">
-    <button class="tab-btn active" onclick="srvSwitchTab('items', event)">🖥️ VM Items</button>
-    <button class="tab-btn"        onclick="srvSwitchTab('infra',  event)">⚙️ Core Infrastructure</button>
-    <button class="tab-btn"        onclick="srvSwitchTab('overview', event)">📋 Overview</button>
+    <button class="tab-btn active" onclick="srvSwitchTab('items', event)">VM Items</button>
+    <button class="tab-btn"        onclick="srvSwitchTab('infra',  event)">Core Infrastructure</button>
+    <button class="tab-btn"        onclick="srvSwitchTab('overview', event)">Overview</button>
 </div>
 
 <!-- Tab 1: VM Items -->

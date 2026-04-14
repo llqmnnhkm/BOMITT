@@ -17,7 +17,7 @@
     <!-- Auto-detected User Range Display -->
     <div style="padding: 15px; background: linear-gradient(90deg, rgba(0, 112, 239, 0.1) 0%, rgba(128, 199, 160, 0.1) 100%); border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #0070ef;">
         <div style="display: flex; align-items: center; gap: 1rem;">
-            <span style="font-size: 2rem;">👥</span>
+            <span style="font-size: 2rem;"></span>
             <div>
                 <div style="font-size: 0.875rem; color: #666; margin-bottom: 4px;">Detected User Range:</div>
                 <div style="font-size: 1.25rem; font-weight: 700; color: #0070ef;" id="detected-user-range">
@@ -138,7 +138,7 @@ function detectUserRange() {
     }
     
     const userQuantityText = userQuantitySelect.value;
-    console.log('📊 User Quantity Selected:', userQuantityText);
+    console.log('User Quantity Selected:', userQuantityText);
     
     if (!userQuantityText) {
         detectedUserRange = '';

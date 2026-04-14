@@ -23,8 +23,8 @@
 
 <!-- Management Tabs -->
 <div class="management-tabs">
-    <button class="tab-btn active" onclick="euSwitchTab('items', event)">💻 Equipment Items</button>
-    <button class="tab-btn"        onclick="euSwitchTab('catalog', event)">📋 Catalog Overview</button>
+    <button class="tab-btn active" onclick="euSwitchTab('items', event)">Equipment Items</button>
+    <button class="tab-btn"        onclick="euSwitchTab('catalog', event)">Catalog Overview</button>
 </div>
 
 <!-- Tab 1: Equipment Items (main CRUD table) -->

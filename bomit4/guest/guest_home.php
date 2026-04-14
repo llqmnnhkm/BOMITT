@@ -39,14 +39,6 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
                 📝
             </a>
 
-            <a href="view_cart.php"
-               style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: linear-gradient(145deg, #ffffff, #f1f5f9); border-radius: 50%; border: 1px solid #e2e8f0; box-shadow: 2px 2px 6px rgba(0,0,0,0.12), -2px -2px 6px rgba(255,255,255,0.8); text-decoration: none; font-size: 20px; line-height: 0; color: #80c7a0; transition: all 0.25s ease; cursor: pointer;"
-               title="View Cart"
-               onmouseover="this.style.background='linear-gradient(145deg, #0070ef, #80c7a0)'; this.style.color='#ffffff'; this.style.boxShadow='0 4px 12px rgba(16,185,129,0.45)'; this.style.transform='scale(1.12)';"
-               onmouseout="this.style.background='linear-gradient(145deg, #ffffff, #f1f5f9)'; this.style.color='#10b981'; this.style.boxShadow='2px 2px 6px rgba(0,0,0,0.12), -2px -2px 6px rgba(255,255,255,0.8)'; this.style.transform='scale(1)';">
-                🛒
-            </a>
-
             <!-- Currency toggle: MYR | USD | EUR -->
             <div id="bomit-currency-toggle"
                  style="display:flex; align-items:center; gap:6px; margin-right:4px;">
@@ -72,7 +64,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
         <!-- Category Cards -->
         <div class="categories-grid">
             <div class="category-card" onclick="showCategory('server')" id="card-server">
-                <div class="category-header server">🖥️</div>
+                <div class="category-header server"></div>
                 <div class="category-body">
                     <h3>Server Infrastructure</h3>
                     <p>Configure server storage and applications</p>
@@ -80,7 +72,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
             </div>
 
             <div class="category-card" onclick="showCategory('network')" id="card-network">
-                <div class="category-header network">🌐</div>
+                <div class="category-header network"></div>
                 <div class="category-body">
                     <h3>Network Infrastructure</h3>
                     <p>Configure networking equipment</p>
@@ -88,7 +80,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
             </div>
 
             <div class="category-card" onclick="showCategory('conference')" id="card-conference">
-                <div class="category-header conference">👥</div>
+                <div class="category-header conference"></div>
                 <div class="category-body">
                     <h3>Conference Room</h3>
                     <p>Configure meeting room technology</p>
@@ -96,7 +88,7 @@ $user_quantity = $_SESSION['user_quantity'] ?? '';
             </div>
 
             <div class="category-card" onclick="showCategory('enduser')" id="card-enduser">
-                <div class="category-header enduser">💻</div>
+                <div class="category-header enduser"></div>
                 <div class="category-body">
                     <h3>End User Equipment</h3>
                     <p>Configure workstations and peripherals</p>

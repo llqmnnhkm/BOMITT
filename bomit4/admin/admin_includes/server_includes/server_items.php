@@ -50,9 +50,9 @@ if ($count == 0) {
 
 // Lookup
 $srv_types = [
-    'core_infra'  => '⚙️ Core Infrastructure',
-    'project_req' => '📁 Project Requirement',
-    'application' => '💻 Application Server',
+    'core_infra'  => 'Core Infrastructure',
+    'project_req' => 'Project Requirement',
+    'application' => 'Application Server',
 ];
 
 // Fetch
@@ -79,7 +79,7 @@ if ($res) { while ($r = $res->fetch_assoc()) $records[] = $r; }
             (<?php echo count($records); ?> items)
         </span>
     </h4>
-    <button class="add-btn" onclick="srvOpenModal('add')">➕ Add VM Item</button>
+    <button class="add-btn" onclick="srvOpenModal('add')">Add VM Item</button>
 </div>
 
 <!-- Table -->
@@ -101,7 +101,7 @@ if ($res) { while ($r = $res->fetch_assoc()) $records[] = $r; }
         <?php if (empty($records)): ?>
         <tr id="srv-empty-row">
             <td colspan="9" style="text-align:center;padding:2rem;color:#999;font-style:italic;">
-                No items yet. Click <strong>➕ Add VM Item</strong>.
+                No items yet. Click <strong>Add VM Item</strong>.
             </td>
         </tr>
         <?php else: ?>
@@ -131,11 +131,11 @@ if ($res) { while ($r = $res->fetch_assoc()) $records[] = $r; }
                 <button class="btn-edit"
                     onclick='srvOpenModal("edit", this)'
                     data-row='<?php echo htmlspecialchars(json_encode($row), ENT_QUOTES); ?>'>
-                    ✏️ Edit
+                    Edit
                 </button>
                 <button class="btn-delete"
                     onclick="srvDeleteItem(<?php echo (int)$row['id']; ?>)">
-                    🗑️ Delete
+                    Delete
                 </button>
             </td>
         </tr>
@@ -213,7 +213,7 @@ if ($res) { while ($r = $res->fetch_assoc()) $records[] = $r; }
 <!-- Delete Confirm Modal -->
 <div id="srv-delete-modal" class="modal">
     <div class="modal-content" style="max-width:420px;text-align:center;">
-        <div style="font-size:3rem;margin-bottom:1rem;">🗑️</div>
+        <div style="font-size:3rem;margin-bottom:1rem;"></div>
         <h3 style="color:#dc3545;margin-bottom:.75rem;">Delete VM Item?</h3>
         <p style="color:#666;margin-bottom:1.5rem;" id="srv-delete-text">This will permanently remove the item.</p>
         <div style="display:flex;gap:1rem;justify-content:center;">
@@ -251,7 +251,7 @@ function srvFilterItems() {
 function srvOpenModal(mode, btnOrData = null) {
     document.getElementById('srv-item-form').reset();
     document.getElementById('srv-modal-title').textContent =
-        mode === 'add' ? '➕ Add VM Item' : '✏️ Edit VM Item';
+        mode === 'add' ? 'Add VM Item' : 'Edit VM Item';
 
     if (mode === 'add') {
         document.getElementById('srv-item-id').value = '';

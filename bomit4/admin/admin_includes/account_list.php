@@ -27,10 +27,10 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
 <!-- Stat cards -->
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem;">
     <?php foreach ([
-        ['👤','Total Accounts', $total,   '#1565c0','#e3f2fd'],
-        ['✅','Active',         $active,  '#2e7d32','#e8f5e9'],
-        ['👥','Guests',         $guests,  '#e65100','#fff3e0'],
-        ['🔐','Admins',         $admins,  '#6a1b9a','#f3e5f5'],
+        ['','Total Accounts', $total,   '#1565c0','#e3f2fd'],
+        ['','Active',         $active,  '#2e7d32','#e8f5e9'],
+        ['','Guests',         $guests,  '#e65100','#fff3e0'],
+        ['','Admins',         $admins,  '#6a1b9a','#f3e5f5'],
     ] as [$icon,$label,$val,$color,$bg]): ?>
     <div style="background:<?php echo $bg; ?>;border-left:4px solid <?php echo $color; ?>;padding:1rem;border-radius:10px;">
         <div style="font-size:1.4rem;"><?php echo $icon; ?></div>
@@ -135,7 +135,7 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
                 <span style="padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:600;
                              background:<?php echo $isAdmin ? '#ede7f6' : '#e3f2fd'; ?>;
                              color:<?php echo $isAdmin ? '#4527a0' : '#1565c0'; ?>;">
-                    <?php echo $isAdmin ? '🔐 Admin' : '👤 Guest'; ?>
+                    <?php echo $isAdmin ? 'Admin' : 'Guest'; ?>
                 </span>
             </td>
 
@@ -166,7 +166,7 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
                         'role'       => $acc['role'],
                         'is_active'  => $acc['is_active'],
                     ]), ENT_QUOTES); ?>'>
-                    ✏️ Edit
+                    Edit
                 </button>
                 <button onclick="accToggleActive(<?php echo $acc['id']; ?>, <?php echo $isActive ? 0 : 1; ?>, this)"
                     style="display:block;width:100%;margin-bottom:4px;padding:5px 10px;border-radius:6px;
@@ -178,7 +178,7 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
                 <?php if (!$isAdmin): // Protect admin accounts from deletion ?>
                 <button class="btn-delete"
                     onclick="accConfirmDelete(<?php echo $acc['id']; ?>, '<?php echo htmlspecialchars($acc['full_name'] ?: $acc['user_id'], ENT_QUOTES); ?>')">
-                    🗑️ Delete
+                    Delete
                 </button>
                 <?php endif; ?>
             </td>
@@ -192,7 +192,7 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
 <div id="acc-edit-modal" class="modal">
     <div class="modal-content" style="max-width:600px;">
         <div class="modal-header">
-            <h3>✏️ Edit Account</h3>
+            <h3>Edit Account</h3>
             <button class="modal-close" onclick="document.getElementById('acc-edit-modal').classList.remove('active')">&times;</button>
         </div>
         <form id="acc-edit-form" onsubmit="accSaveEdit(event)">
@@ -222,8 +222,8 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
                 <div class="form-group">
                     <label>Role</label>
                     <select id="acc-edit-role" name="role">
-                        <option value="guest">👤 Guest (IT Project Manager)</option>
-                        <option value="admin">🔐 Admin</option>
+                        <option value="guest">Guest (IT Project Manager)</option>
+                        <option value="admin">Admin</option>
                     </select>
                 </div>
             </div>
@@ -231,7 +231,7 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
             <!-- Password reset section -->
             <div style="background:#fff3e0;border-radius:8px;padding:1rem;margin-top:.5rem;border-left:4px solid #e65100;">
                 <label style="font-weight:600;color:#e65100;display:block;margin-bottom:.5rem;">
-                    🔑 Reset Password (leave blank to keep current)
+                    Reset Password (leave blank to keep current)
                 </label>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
                     <div class="form-group" style="margin:0;">
@@ -263,7 +263,7 @@ $admins  = count(array_filter($accounts, fn($a) => $a['role'] === 'admin'));
 <!-- Delete Confirm Modal -->
 <div id="acc-delete-modal" class="modal">
     <div class="modal-content" style="max-width:420px;text-align:center;">
-        <div style="font-size:3rem;margin-bottom:1rem;">🗑️</div>
+        <div style="font-size:3rem;margin-bottom:1rem;"></div>
         <h3 style="color:#dc3545;margin-bottom:.75rem;">Delete Account?</h3>
         <p style="color:#666;margin-bottom:.5rem;" id="acc-delete-text">This will permanently remove the account.</p>
         <p style="font-size:.82rem;color:#999;margin-bottom:1.5rem;">

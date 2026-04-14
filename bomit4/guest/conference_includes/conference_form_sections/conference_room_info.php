@@ -51,9 +51,9 @@
     <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1.25rem;">
         <?php
         $sizes = [
-            'small'  => ['label'=>'Small',  'sub'=>'4–6 people',  'icon'=>'🪑'],
-            'medium' => ['label'=>'Medium', 'sub'=>'8–12 people', 'icon'=>'👥'],
-            'large'  => ['label'=>'Large',  'sub'=>'15+ people',  'icon'=>'🏛️'],
+            'small'  => ['label'=>'Small',  'sub'=>'4–6 people',  'icon'=>''],
+            'medium' => ['label'=>'Medium', 'sub'=>'8–12 people', 'icon'=>''],
+            'large'  => ['label'=>'Large',  'sub'=>'15+ people',  'icon'=>''],
         ];
         foreach ($sizes as $size_key => $info):
         ?>

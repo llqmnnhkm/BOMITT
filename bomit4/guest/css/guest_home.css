@@ -301,16 +301,16 @@ main {
     background: #ee7766; 
 }
 
-.container-icon.enduser { 
-    background: #66bb6a; 
+.container-icon.network { 
+    background: #23395d; 
 }
 
 .container-icon.conference { 
     background: #ab47bc; 
 }
 
-.container-icon.network { 
-    background: #0070ef; 
+.container-icon.enduser { 
+    background: #23395d;
 }
 
 .container-title h3 {

@@ -84,7 +84,7 @@ function gatherNetworkConfig() {
         const starlinkType     = document.querySelector('select[name="starlink_type"]')?.value;
 
         if (internetAccess === 'DIA' && dia) {
-            const price = parseFloat(document.getElementById('price-dia')?.textContent.replace(/[$,]/g, '')) || 0;
+            const price = parseFloat(document.getElementById('price-dia')?.textContent.replace(/[^0-9.]/g, '')) || 0;
             configHtml += `<tr><td>Direct Internet Access - ${dia}</td><td>${formatCurrency(price)}</td></tr>`;
             total += price;
 
@@ -103,7 +103,7 @@ function gatherNetworkConfig() {
 
         } else if (internetAccess === 'Business Broadband') {
             if (businessBroadband === 'Starlink' && starlinkType) {
-                const price = parseFloat(document.getElementById('price-starlink')?.textContent.replace(/[$,]/g, '')) || 0;
+                const price = parseFloat(document.getElementById('price-starlink')?.textContent.replace(/[^0-9.]/g, '')) || 0;
                 const displayName = starlinkType.replace('Starlink_', '').replace(/_/g, ' ');
                 configHtml += `<tr><td>Business Broadband - Starlink ${displayName}</td><td>${formatCurrency(price)}</td></tr>`;
                 total += price;
@@ -122,7 +122,7 @@ function gatherNetworkConfig() {
                 }
 
             } else if (businessBroadband && businessBroadband !== 'Starlink') {
-                const price = parseFloat(document.getElementById('price-business-broadband')?.textContent.replace(/[$,]/g, '')) || 0;
+                const price = parseFloat(document.getElementById('price-business-broadband')?.textContent.replace(/[^0-9.]/g, '')) || 0;
                 configHtml += `<tr><td>Business Broadband - ${businessBroadband}</td><td>${formatCurrency(price)}</td></tr>`;
                 total += price;
 
@@ -145,7 +145,7 @@ function gatherNetworkConfig() {
     // WAN Connectivity
     const wan = document.querySelector('select[name="wan_connectivity"]')?.value;
     if (wan && wan !== 'None') {
-        const price = parseFloat(document.getElementById('price-wan')?.textContent.replace(/[$,]/g, '')) || 0;
+        const price = parseFloat(document.getElementById('price-wan')?.textContent.replace(/[^0-9.]/g, '')) || 0;
         configHtml += `<tr><td>WAN Connectivity - ${wan}</td><td>${formatCurrency(price)}</td></tr>`;
         total += price;
 
@@ -166,7 +166,7 @@ function gatherNetworkConfig() {
     // VSAT
     const vsat = document.querySelector('select[name="vsat"]')?.value;
     if (vsat && vsat !== 'None') {
-        const price = parseFloat(document.getElementById('price-vsat')?.textContent.replace(/[$,]/g, '')) || 0;
+        const price = parseFloat(document.getElementById('price-vsat')?.textContent.replace(/[^0-9.]/g, '')) || 0;
         configHtml += `<tr><td>VSAT - ${vsat}</td><td>${formatCurrency(price)}</td></tr>`;
         total += price;
     }
@@ -175,7 +175,7 @@ function gatherNetworkConfig() {
     const vsatHa = document.querySelector('select[name="vsat_ha"]')?.value;
     console.log('🔍 VSAT HA Value:', vsatHa);
     if (vsatHa && vsatHa !== '' && vsatHa !== 'None' && vsatHa === 'Yes') {
-        const price = parseFloat(document.getElementById('price-vsat-ha')?.textContent.replace(/[$,]/g, '')) || 0;
+        const price = parseFloat(document.getElementById('price-vsat-ha')?.textContent.replace(/[^0-9.]/g, '')) || 0;
         console.log('✅ VSAT HA Price Parsed:', price);
         if (price > 0) {
             configHtml += `<tr><td>High Availability Required</td><td>${formatCurrency(price)}</td></tr>`;
@@ -187,7 +187,7 @@ function gatherNetworkConfig() {
     const vsatService = document.querySelector('select[name="vsat_service"]')?.value;
     console.log('🔍 VSAT Service Value:', vsatService);
     if (vsatService && vsatService !== '' && vsatService !== 'None') {
-        const price = parseFloat(document.getElementById('price-vsat-service')?.textContent.replace(/[$,]/g, '')) || 0;
+        const price = parseFloat(document.getElementById('price-vsat-service')?.textContent.replace(/[^0-9.]/g, '')) || 0;
         console.log('✅ VSAT Service Price Parsed:', price);
         if (price > 0) {
             configHtml += `<tr><td>Intended Service Usage - ${vsatService}</td><td>${formatCurrency(price)}</td></tr>`;
@@ -323,9 +323,9 @@ function gatherNotes() {
 
 // ── Calculate Totals ──────────────────────────────────────────
 function calculateTotals() {
-    const networkTotal   = parseFloat(document.getElementById('report-network-total').textContent.replace(/[$,]/g, ''))   || 0;
-    const equipmentTotal = parseFloat(document.getElementById('report-equipment-total').textContent.replace(/[$,]/g, '')) || 0;
-    const cablesTotal    = parseFloat(document.getElementById('report-cables-total').textContent.replace(/[$,]/g, ''))    || 0;
+    const networkTotal   = parseFloat(document.getElementById('report-network-total').textContent.replace(/[^0-9.]/g, ''))   || 0;
+    const equipmentTotal = parseFloat(document.getElementById('report-equipment-total').textContent.replace(/[^0-9.]/g, '')) || 0;
+    const cablesTotal    = parseFloat(document.getElementById('report-cables-total').textContent.replace(/[^0-9.]/g, ''))    || 0;
 
     const subtotal        = networkTotal + equipmentTotal + cablesTotal;
     const installationBase = equipmentTotal + cablesTotal;

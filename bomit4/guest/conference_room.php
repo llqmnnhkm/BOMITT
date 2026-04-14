@@ -17,7 +17,7 @@ $user_quantity      = $user_quantity      ?? ($_SESSION['user_quantity']      ??
     <!-- Container Header -->
     <div class="container-header">
         <div class="container-icon conference" style="background: linear-gradient(135deg, #80c7a0 0%, #4caf50 100%);">
-            👥
+            
         </div>
         <div class="container-title">
             <h3>Conference Room</h3>
@@ -51,7 +51,7 @@ $user_quantity      = $user_quantity      ?? ($_SESSION['user_quantity']      ??
             <!-- No-selection placeholder -->
             <div id="conf-equip-placeholder"
                  style="padding:24px; background:#f9f9f9; border-radius:8px; text-align:center; color:#999; border:2px dashed #ddd;">
-                👆 Please select a room size above to load equipment
+                 Please select a room size above to load equipment
             </div>
 
             <?php include 'conference_includes/conference_form_sections/conference_equipment_dynamic.php'; ?>
@@ -71,17 +71,17 @@ $user_quantity      = $user_quantity      ?? ($_SESSION['user_quantity']      ??
 
             <button type="button" onclick="resetConferenceConfiguration()" class="btn btn-warning"
                 style="flex:0.8; background:#f59e0b; color:white;">
-                🔄 Reset Form
+                 Reset Form
             </button>
 
             <button type="button" onclick="saveConferenceConfiguration()" class="btn btn-success"
                 style="flex:1; background:#10b981; color:white;">
-                💾 Save Configuration
+                 Save Configuration
             </button>
 
             <button type="button" onclick="showConferenceReport()" class="btn btn-primary"
                 style="flex:1; background:linear-gradient(90deg,#80c7a0 0%,#0070ef 100%); color:white;">
-                📊 View Report Summary
+                 View Report Summary
             </button>
 
             <button type="button" class="btn btn-secondary" onclick="hideAllContainers()"

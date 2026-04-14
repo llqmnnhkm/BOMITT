@@ -12,8 +12,8 @@
 
 <!-- Management Tabs -->
 <div class="management-tabs">
-    <button class="tab-btn active" onclick="confSwitchTab('items', event)">🎬 Equipment Items</button>
-    <button class="tab-btn"        onclick="confSwitchTab('overview', event)">📋 Room Overview</button>
+    <button class="tab-btn active" onclick="confSwitchTab('items', event)">Equipment Items</button>
+    <button class="tab-btn"        onclick="confSwitchTab('overview', event)">Room Overview</button>
 </div>
 
 <!-- Tab 1: Equipment CRUD table -->

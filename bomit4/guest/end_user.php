@@ -8,10 +8,10 @@ $eu_user_types = [
     'executive' => ['label'=>'Executive / VIP', 'emoji'=>'💼', 'bg'=>'#ede7f6', 'accent'=>'#4527a0', 'border'=>'#b39ddb', 'header'=>'linear-gradient(90deg,#512da8,#4527a0)', 'sub_text'=>'#311b92'],
 ];
 $eu_category_labels = [
-    'workstation' => ['label' => 'Workstation Equipment',     'emoji' => '🖥️'],
-    'peripherals' => ['label' => 'Peripherals & Accessories', 'emoji' => '🖱️'],
-    'mobile'      => ['label' => 'Mobile & Communications',   'emoji' => '📱'],
-    'software'    => ['label' => 'Software & Licenses',       'emoji' => '💿'],
+    'workstation' => ['label' => 'Workstation Equipment',     'emoji' => ''],
+    'peripherals' => ['label' => 'Peripherals & Accessories', 'emoji' => ''],
+    'mobile'      => ['label' => 'Mobile & Communications',   'emoji' => ''],
+    'software'    => ['label' => 'Software & Licenses',       'emoji' => ''],
 ];
 $eu_catalog = [];
 $eu_stmt = $conn->prepare(
@@ -42,7 +42,7 @@ $eu_max_users = euParseMaxUsers($user_quantity ?? '');
 <!-- End User Container -->
 <div id="container-enduser" class="question-container">
     <div class="container-header">
-        <div class="container-icon enduser">💻</div>
+        <div class="container-icon enduser"></div>
         <div class="container-title">
             <h3>End User Equipment</h3>
             <p>Configure workstation and peripheral requirements</p>
@@ -89,11 +89,11 @@ $eu_max_users = euParseMaxUsers($user_quantity ?? '');
 
         <!-- ── 2. USER TYPE MULTI-SELECTION ─────────────────────────── -->
         <div class="eu-section">
-            <div class="eu-section-header"><span>👤</span> User Types & Headcount</div>
+            <div class="eu-section-header"><span></span> User Types & Headcount</div>
 
             <!-- User range banner -->
             <div style="padding:14px 18px;background:linear-gradient(90deg,rgba(0,112,239,.07),rgba(128,199,160,.07));border-radius:8px;margin-bottom:1.25rem;border-left:4px solid #0070ef;display:flex;align-items:center;gap:12px;">
-                <span style="font-size:1.8rem;">👥</span>
+                <span style="font-size:1.8rem;"></span>
                 <div>
                     <div style="font-size:.8rem;color:#666;margin-bottom:2px;">Project user range:</div>
                     <div style="font-size:1.1rem;font-weight:700;color:#0070ef;" id="eu-range-label">
@@ -159,7 +159,7 @@ $eu_max_users = euParseMaxUsers($user_quantity ?? '');
             </div>
 
             <!-- Selection summary badge -->
-            <div id="eu-selection-summary" style="display:none;padding:12px 16px;background:#e8f5e9;border-radius:8px;border-left:4px solid #4caf50;margin-top:.5rem;">
+            <div id="eu-selection-summary" style="display:none;padding:12px 16px;background:#e8f5e9;border-radius:8px;border-left:4px solid #000000;margin-top:.5rem;">
                 <span style="font-size:1rem;">✅</span>
                 <span id="eu-summary-text" style="font-weight:600;color:#1b5e20;margin-left:8px;"></span>
             </div>
@@ -275,17 +275,17 @@ $eu_max_users = euParseMaxUsers($user_quantity ?? '');
 
         <!-- ── Notes ─────────────────────────────────────────────────── -->
         <div class="eu-section">
-            <div class="eu-section-header"><span>📝</span> Additional Notes</div>
+            <div class="eu-section-header"><span></span> Additional Notes</div>
             <textarea name="eu_notes" rows="4" placeholder="Vendor preferences, special requirements…"
                 style="width:100%;padding:12px;font-family:Montserrat;font-size:1rem;border:1px solid #ccc;border-radius:8px;box-sizing:border-box;resize:vertical;"></textarea>
         </div>
 
         <!-- ── Form Actions ───────────────────────────────────────────── -->
         <div class="form-actions" style="display:flex;gap:1rem;margin-top:2rem;align-items:center;flex-wrap:wrap;">
-            <button type="button" onclick="euResetForm()" class="btn btn-warning" style="flex:.8;background:#f59e0b;color:white;">🔄 Reset</button>
-            <button type="button" onclick="euSaveConfiguration()" class="btn btn-success" style="flex:1;background:#10b981;color:white;">💾 Save Configuration</button>
-            <button type="button" onclick="euShowReport()" class="btn btn-primary" style="flex:1;background:linear-gradient(90deg,#0070ef,#4A90E2);color:white;">📊 View Report</button>
-            <button type="button" class="btn btn-secondary" onclick="hideAllContainers()" style="flex:.6;background:#e2e8f0;color:#4a5568;">❌ Cancel</button>
+            <button type="button" onclick="euResetForm()" class="btn btn-warning" style="flex:.8;background:#f59e0b;color:white;"> Reset</button>
+            <button type="button" onclick="euSaveConfiguration()" class="btn btn-success" style="flex:1;background:#10b981;color:white;"> Save Configuration</button>
+            <button type="button" onclick="euShowReport()" class="btn btn-primary" style="flex:1;background:linear-gradient(90deg,#0070ef,#4A90E2);color:white;"> View Report</button>
+            <button type="button" class="btn btn-secondary" onclick="hideAllContainers()" style="flex:.6;background:#e2e8f0;color:#4a5568;"> Cancel</button>
         </div>
     </form>
 </div>
@@ -299,9 +299,8 @@ $eu_max_users = euParseMaxUsers($user_quantity ?? '');
         </div>
         <div id="eu-report-body" style="padding:36px 40px;"></div>
         <div style="padding:20px 40px;border-top:1px solid #e0e0e0;display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
-            <button onclick="euExportPDF()" class="btn btn-primary" style="background:linear-gradient(135deg,#0070ef,#4A90E2);color:white;">📄 Export PDF</button>
-            <button onclick="exportEndUserExcel()" class="btn" style="background:linear-gradient(90deg,#217346,#1a5c38);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:Montserrat,sans-serif;font-weight:600;font-size:.9rem;display:inline-flex;align-items:center;gap:6px;">📊 Export Excel</button>
-            <button onclick="window.print()" class="btn btn-success" style="background:#10b981;color:white;">🖨️ Print</button>
+            <button onclick="euExportPDFWithPrices()" class="btn btn-primary" style="background:linear-gradient(135deg,#0070ef,#4A90E2);color:white;">💰 Export PDF (With Prices)</button>
+            <button onclick="euExportPDFNoPrices()" class="btn" style="background:linear-gradient(135deg,#6366f1,#818cf8);color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-family:Montserrat,sans-serif;font-weight:600;font-size:1rem;">📄 Export PDF (Without Prices)</button>
             <button onclick="euCloseReport()" class="btn btn-secondary" style="background:#6b7280;color:white;">✕ Close</button>
         </div>
     </div>
@@ -631,7 +630,7 @@ function euShowReport() {
             </tbody>
         </table></div>`;
 
-    if (d.notes) html += `<div><h3 style="color:#0070ef;font-size:1.1rem;margin-bottom:8px;">📝 Notes</h3><div style="background:#f7f9fc;padding:16px;border-radius:10px;line-height:1.8;color:#2d3748;">${d.notes.replace(/\n/g,'<br>')}</div></div>`;
+    if (d.notes) html += `<div><h3 style="color:#0070ef;font-size:1.1rem;margin-bottom:8px;"> Notes</h3><div style="background:#f7f9fc;padding:16px;border-radius:10px;line-height:1.8;color:#2d3748;">${d.notes.replace(/\n/g,'<br>')}</div></div>`;
 
     document.getElementById('eu-report-body').innerHTML = html;
     document.getElementById('eu-report-modal').style.display = 'block';
@@ -639,7 +638,7 @@ function euShowReport() {
 
 function euCloseReport() { document.getElementById('eu-report-modal').style.display = 'none'; }
 
-function euExportPDF() {
+function euExportPDFWithPrices() {
     const { jsPDF } = window.jspdf;
     if (!jsPDF) { alert('jsPDF not loaded'); return; }
     const d = euCollectData();
@@ -668,7 +667,38 @@ function euExportPDF() {
             y = doc.lastAutoTable.finalY + 6;
         });
     });
-    doc.save('End_User_Report_' + projName.replace(/\s+/g,'_') + '.pdf');
+    doc.save('End_User_Report_With_Prices_' + projName.replace(/\s+/g,'_') + '.pdf');
+}
+
+function euExportPDFNoPrices() {
+    const { jsPDF } = window.jspdf;
+    if (!jsPDF) { alert('jsPDF not loaded'); return; }
+    const d = euCollectData();
+    const projName = document.querySelector('input[name="project_name"]')?.value || 'Project';
+    const doc = new jsPDF({ orientation:'p', unit:'mm', format:'a4' });
+
+    doc.setFontSize(16); doc.setTextColor(0,112,239);
+    doc.text('End User Equipment Report', 14, 18);
+    doc.setFontSize(10); doc.setTextColor(100);
+    doc.text('Project: ' + projName, 14, 26);
+    doc.text('Generated: ' + new Date().toLocaleDateString(), 14, 31);
+
+    let y = 40;
+    Object.entries(d.types).forEach(([utKey, typeData]) => {
+        if (y > 250) { doc.addPage(); y = 20; }
+        doc.setFontSize(12); doc.setTextColor(0,112,239);
+        doc.text((EU_TYPE_LABELS[utKey]||utKey) + ' (' + typeData.user_count + ' users)', 14, y); y += 6;
+        Object.entries(typeData.categories).forEach(([cat, items]) => {
+            const filled = items.filter(i => i.qty > 0);
+            if (!filled.length) return;
+            if (y > 250) { doc.addPage(); y = 20; }
+            doc.autoTable({ startY:y, head:[[EU_CAT_LABELS[cat]||cat,'Qty']],
+                body: filled.map(i=>[i.name,i.qty]),
+                theme:'striped', headStyles:{fillColor:[74,144,226],fontSize:8}, bodyStyles:{fontSize:8}, margin:{left:14,right:14} });
+            y = doc.lastAutoTable.finalY + 6;
+        });
+    });
+    doc.save('End_User_Report_Without_Prices_' + projName.replace(/\s+/g,'_') + '.pdf');
 }
 
 function euFmt(v) { return window.formatCurrency ? formatCurrency(v) : 'RM ' + parseFloat(v||0).toFixed(2); }

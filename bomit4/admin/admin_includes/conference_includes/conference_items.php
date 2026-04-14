@@ -17,10 +17,10 @@ $conf_room_types = [
 ];
 
 $conf_categories = [
-    'av'           => '🎥 AV Equipment',
-    'connectivity' => '🔌 Connectivity',
-    'furniture'    => '🪑 Furniture',
-    'other'        => '📦 Other',
+    'av'           => 'AV Equipment',
+    'connectivity' => 'Connectivity',
+    'furniture'    => 'Furniture',
+    'other'        => 'Other',
 ];
 
 // ── Fetch all records (safe direct query with error handling) ─────────────
@@ -75,7 +75,7 @@ if ($table_check && $table_check->num_rows > 0) {
             (<?php echo count($records); ?> items)
         </span>
     </h4>
-    <button class="add-btn" onclick="confOpenModal('add')">➕ Add Equipment</button>
+    <button class="add-btn" onclick="confOpenModal('add')">Add Equipment</button>
 </div>
 
 <!-- ── Equipment Table ────────────────────────────────────────────────── -->
@@ -95,7 +95,7 @@ if ($table_check && $table_check->num_rows > 0) {
         <?php if (empty($records)): ?>
         <tr id="conf-empty-row">
             <td colspan="7" style="text-align:center; padding:2rem; color:#999; font-style:italic;">
-                No items yet. Click <strong>➕ Add Equipment</strong> to get started.
+                No items yet. Click <strong>Add Equipment</strong> to get started.
             </td>
         </tr>
         <?php else: ?>
@@ -121,11 +121,11 @@ if ($table_check && $table_check->num_rows > 0) {
             <td>
                 <button class="btn-edit"
                     onclick='confOpenModal("edit", this)' data-row='<?php echo htmlspecialchars(json_encode($row), ENT_QUOTES); ?>'>
-                    ✏️ Edit
+                    Edit
                 </button>
                 <button class="btn-delete"
                     onclick="confDeleteItem(<?php echo (int)$row['id']; ?>)">
-                    🗑️ Delete
+                    Delete
                 </button>
             </td>
         </tr>
@@ -203,7 +203,7 @@ if ($table_check && $table_check->num_rows > 0) {
 <!-- ── Delete Confirm Modal ───────────────────────────────────────────── -->
 <div id="conf-delete-modal" class="modal">
     <div class="modal-content" style="max-width:420px; text-align:center;">
-        <div style="font-size:3rem; margin-bottom:1rem;">🗑️</div>
+        <div style="font-size:3rem; margin-bottom:1rem;"></div>
         <h3 style="color:#dc3545; margin-bottom:.75rem;">Delete Item?</h3>
         <p style="color:#666; margin-bottom:1.5rem;" id="conf-delete-text">
             This will permanently remove the item from the database.
@@ -287,7 +287,7 @@ function confCloseModal() {
 function confOpenModal(mode, btnOrData = null) {
     document.getElementById('conf-item-form').reset();
     document.getElementById('conf-modal-title').textContent =
-        mode === 'add' ? '➕ Add Conference Equipment' : '✏️ Edit Conference Equipment';
+        mode === 'add' ? 'Add Conference Equipment' : 'Edit Conference Equipment';
 
     if (mode === 'add') {
         document.getElementById('conf-item-id').value    = '';
@@ -470,8 +470,8 @@ function confAddRow(id, fd) {
         <td style="text-align:center;">${fd.get('quantity')}</td>
         <td><span class="price-badge">$${parseFloat(fd.get('price')).toFixed(2)}</span></td>
         <td>
-            <button class="btn-edit" onclick='confOpenModal("edit", this)' data-row='${confSafeJson(rowData)}'>✏️ Edit</button>
-            <button class="btn-delete" onclick="confDeleteItem(${id})">🗑️ Delete</button>
+            <button class="btn-edit" onclick='confOpenModal("edit", this)' data-row='${confSafeJson(rowData)}'>Edit</button>
+            <button class="btn-delete" onclick="confDeleteItem(${id})">Delete</button>
         </td>`;
 
     tbody.appendChild(row);

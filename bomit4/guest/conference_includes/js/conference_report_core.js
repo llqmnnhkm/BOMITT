@@ -56,22 +56,25 @@ function crGatherProjectInfo() {
 
 // ── Gather: Room Info ─────────────────────────────────────────
 function crGatherRoomInfo() {
-    const sizeMap = { small: 'Small (4–6 people)', medium: 'Medium (8–12 people)', large: 'Large (15+ people)' };
-    const typeMap = {
-        internal: 'Internal Meetings Only',
-        video: 'Video Conferencing (Teams/Zoom)',
-        presentation: 'Presentations & Training',
-        hybrid: 'Hybrid (all types)'
-    };
-    const setupMap = { new: 'New Installation', upgrade: 'Upgrade Existing', replace: 'Replace Equipment' };
+    const labels = { small:'Small (4–6 people)', medium:'Medium (8–12 people)', large:'Large (15+ people)' };
+    const emojis = { small:'', medium:'', large:'' };
+    const state  = window.confRoomState || { small:0, medium:0, large:0 };
+    const active = Object.keys(state).filter(s => state[s] > 0);
 
-    const size  = document.querySelector('input[name="conference_size"]:checked')?.value || '';
-    const type  = document.querySelector('input[name="conference_meeting_type"]:checked')?.value || '';
-    const setup = document.querySelector('input[name="conference_setup_type"]:checked')?.value || '';
+    const selEl = document.getElementById('cr-room-selection');
+    const totEl = document.getElementById('cr-room-total');
+    if (!selEl) return;
 
-    document.getElementById('cr-room-size').textContent    = sizeMap[size]  || size  || 'Not selected';
-    document.getElementById('cr-meeting-type').textContent = typeMap[type]  || type  || 'Not selected';
-    document.getElementById('cr-setup-type').textContent   = setupMap[setup]|| setup || 'Not selected';
+    if (!active.length) {
+        selEl.innerHTML = '<span style="color:#999;font-style:italic;">No rooms selected</span>';
+        if (totEl) totEl.textContent = '';
+        return;
+    }
+    selEl.innerHTML = active.map(size =>
+        `<span class="cr-room-card cr-room-${size}">${emojis[size]} ${labels[size]} &nbsp;&times;&nbsp; <strong>${state[size]}</strong> room${state[size]>1?'s':''}</span>`
+    ).join('');
+    const total = active.reduce((s,k) => s + state[k], 0);
+    if (totEl) totEl.textContent = `Total: ${total} room${total>1?'s':''} across ${active.length} size${active.length>1?'s':''}`;
 }
 
 // ── Gather: AV & Connectivity ─────────────────────────────────
@@ -111,41 +114,81 @@ function crGatherAVConfig() {
 // ── Gather: Equipment ─────────────────────────────────────────
 function crGatherEquipment() {
     const container = document.getElementById('cr-equipment');
-    let html = '<table class="report-table">';
-    let total = 0;
-    let hasItems = false;
+    const state   = window.confRoomState || {};
+    const sizes   = ['small', 'medium', 'large'];
+    const labels  = { small:'Small (4–6 people)', medium:'Medium (8–12 people)', large:'Large (15+ people)' };
+    const emojis  = { small:'', medium:'', large:'' };
+    const colors  = { small:'#1565c0', medium:'#2e7d32', large:'#6a1b9a' };
+    const bgs     = { small:'#e3f2fd', medium:'#e8f5e9', large:'#f3e5f5' };
 
-    const visibleSection = document.querySelector('.conf-size-section:not(.hidden)');
-    if (visibleSection) {
-        visibleSection.querySelectorAll('input[type="number"]').forEach(input => {
+    let html = '';
+    let grandTotal = 0;
+    let hasAny = false;
+
+    sizes.forEach(size => {
+        const roomQty = state[size] || 0;
+        if (!roomQty) return;
+        const section = document.getElementById('conf_equip_' + size);
+        if (!section) return;
+
+        let sectionTotal = 0;
+        let rows = '';
+
+        section.querySelectorAll('input[type="number"]').forEach(input => {
             const qty = parseFloat(input.value) || 0;
-            if (qty > 0) {
-                hasItems = true;
-                const price    = parseFloat(input.getAttribute('data-price')) || 0;
-                const rowTotal = qty * price;
-                const row      = input.closest('tr');
-                const fullText = row?.querySelector('td:first-child')?.textContent.trim() || '';
-                let itemName = fullText, desc = '';
-                const m = fullText.match(/^(.*?)\s*\((.*?)\)$/);
-                if (m) { itemName = m[1].trim(); desc = m[2].trim(); }
+            if (!qty) return;
+            hasAny = true;
+            const price    = parseFloat(input.getAttribute('data-price')) || 0;
+            const rowTotal = qty * price;
+            sectionTotal  += rowTotal;
+            const row      = input.closest('tr');
+            const fullText = row?.querySelector('td:first-child')?.textContent.trim() || '';
+            let itemName = fullText, desc = '';
+            const m = fullText.match(/^(.*?)\s*\((.*?)\)$/);
+            if (m) { itemName = m[1].trim(); desc = m[2].trim(); }
 
-                html += `<tr>
-                    <td>${itemName}</td>
-                    <td style="color:#666; font-size:0.9rem;">${desc} <span style="color:#999;">(Qty: ${qty})</span></td>
-                    <td>${confFormatCurrency(rowTotal)}</td>
-                </tr>`;
-                total += rowTotal;
-            }
+            rows += `<tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:9px 12px;font-weight:500;color:#2d3748;">${itemName}${desc ? `<br><small style="color:#888;font-weight:400;">${desc}</small>` : ''}</td>
+                <td style="padding:9px 12px;text-align:center;color:#555;">${qty}</td>
+                <td style="padding:9px 12px;text-align:right;color:#666;">${confFormatCurrency(price)}</td>
+                <td style="padding:9px 12px;text-align:right;font-weight:700;color:${colors[size]};">${confFormatCurrency(rowTotal)}</td>
+            </tr>`;
         });
+
+        grandTotal += sectionTotal;
+
+        html += `<div style="margin-bottom:1.5rem;">
+            <div style="font-weight:700;font-size:1rem;color:${colors[size]};padding:10px 12px;
+                        border-radius:8px;margin-bottom:8px;background:${bgs[size]};">
+                ${emojis[size]} ${labels[size]} — ${roomQty} room${roomQty > 1 ? 's' : ''}
+            </div>
+            <table style="width:100%;border-collapse:collapse;font-size:0.875rem;">
+                <thead style="background:#f8f9fa;">
+                    <tr>
+                        <th style="padding:9px 12px;text-align:left;color:#555;font-weight:600;">Item</th>
+                        <th style="padding:9px 12px;text-align:center;color:#555;font-weight:600;width:50px;">Qty</th>
+                        <th style="padding:9px 12px;text-align:right;color:#555;font-weight:600;width:110px;">Unit Price</th>
+                        <th style="padding:9px 12px;text-align:right;color:#555;font-weight:600;width:110px;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>${rows || '<tr><td colspan="4" style="padding:12px;color:#999;text-align:center;font-style:italic;">No items with qty &gt; 0</td></tr>'}</tbody>
+                <tfoot style="border-top:2px solid #e0e0e0;">
+                    <tr>
+                        <td colspan="3" style="padding:9px 12px;text-align:right;font-weight:700;color:${colors[size]};">${labels[size]} Subtotal:</td>
+                        <td style="padding:9px 12px;text-align:right;font-weight:800;font-size:1rem;color:${colors[size]};">${confFormatCurrency(sectionTotal)}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>`;
+    });
+
+    if (!hasAny) {
+        html = '<div style="padding:2rem;text-align:center;color:#999;font-style:italic;">No rooms selected or no items with quantity &gt; 0</div>';
     }
 
-    if (!hasItems) {
-        html += '<tr><td colspan="3"><div class="empty-state">No equipment selected — please choose a room size above</div></td></tr>';
-    }
-    html += '</table>';
     container.innerHTML = html;
-    document.getElementById('cr-equipment-total').textContent = confFormatCurrency(total);
-    return total;
+    document.getElementById('cr-equipment-total').textContent = confFormatCurrency(grandTotal);
+    return grandTotal;
 }
 
 // ── Gather: Notes ─────────────────────────────────────────────
@@ -156,8 +199,9 @@ function crGatherNotes() {
 
 // ── Calculate Totals ──────────────────────────────────────────
 function crCalculateTotals() {
+    // Strip any currency symbol (RM, $, €) before parsing
     const equipTotal = parseFloat(
-        document.getElementById('cr-equipment-total').textContent.replace(/[$,]/g, '')
+        document.getElementById('cr-equipment-total').textContent.replace(/[^0-9.]/g, '')
     ) || 0;
 
     const subtotal    = equipTotal;
@@ -243,20 +287,22 @@ function crRenderProjectInfo(doc, y, boxX, boxWidth, pageWidth, drawBg) {
 }
 
 function crRenderRoomInfo(doc, y, boxX, boxWidth, pageWidth, drawBg) {
+    const labels = { small:'Small (4–6 people)', medium:'Medium (8–12 people)', large:'Large (15+ people)' };
+    const state  = window.confRoomState || {};
+    const active = Object.keys(state).filter(s => state[s] > 0);
+    const roomText = active.length
+        ? active.map(s => `${labels[s]} x${state[s]}`).join(', ')
+        : 'No rooms selected';
+    const totalRooms = active.reduce((s,k) => s + state[k], 0);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(12);
-    doc.text('Room Configuration', boxX + 5, y);
-    y += 5;
+    doc.text('Room Configuration', boxX + 5, y); y += 5;
     doc.autoTable({
         startY: y,
-        head: [['Room Size', 'Meeting Type', 'Setup Type']],
-        body: [[
-            document.getElementById('cr-room-size').textContent,
-            document.getElementById('cr-meeting-type').textContent,
-            document.getElementById('cr-setup-type').textContent,
-        ]],
-        styles:     { font: 'helvetica', halign: 'center', fontSize: 9 },
-        headStyles: { fillColor: [0, 112, 239], textColor: 255 },
+        head: [['Room Selection', 'Total Rooms']],
+        body: [[ roomText, totalRooms + ' room(s)' ]],
+        styles:     { font:'helvetica', halign:'center', fontSize:9 },
+        headStyles: { fillColor:[0,112,239], textColor:255 },
         theme: 'grid',
         margin: { left: boxX + 5, right: pageWidth - boxX - boxWidth + 5 },
         didAddPage: () => drawBg()

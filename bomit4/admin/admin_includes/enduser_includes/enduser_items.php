@@ -83,7 +83,7 @@ if ($table_check && $table_check->num_rows > 0) {
             (<?php echo count($records); ?> items)
         </span>
     </h4>
-    <button class="add-btn" onclick="euOpenItemModal('add')">➕ Add Item</button>
+    <button class="add-btn" onclick="euOpenItemModal('add')">Add Item</button>
 </div>
 
 <!-- ── Equipment Table ────────────────────────────────────────────────── -->
@@ -104,7 +104,7 @@ if ($table_check && $table_check->num_rows > 0) {
         <?php if (empty($records)): ?>
         <tr id="eu-empty-row">
             <td colspan="8" style="text-align:center; padding:2rem; color:#999; font-style:italic;">
-                No items yet. Click <strong>➕ Add Item</strong> to get started.
+                No items yet. Click <strong>Add Item</strong> to get started.
             </td>
         </tr>
         <?php else: ?>
@@ -146,11 +146,11 @@ if ($table_check && $table_check->num_rows > 0) {
             <td>
                 <button class="btn-edit"
                     onclick='euOpenItemModal("edit", <?php echo json_encode($row); ?>)'>
-                    ✏️ Edit
+                    Edit
                 </button>
                 <button class="btn-delete"
                     onclick="euDeleteItem(<?php echo (int)$row['id']; ?>)">
-                    🗑️ Delete
+                    Delete
                 </button>
             </td>
         </tr>
@@ -239,7 +239,7 @@ if ($table_check && $table_check->num_rows > 0) {
 <!-- ── Delete Confirm Modal ───────────────────────────────────────────── -->
 <div id="eu-delete-modal" class="modal">
     <div class="modal-content" style="max-width:420px; text-align:center;">
-        <div style="font-size:3rem; margin-bottom:1rem;">🗑️</div>
+        <div style="font-size:3rem; margin-bottom:1rem;"></div>
         <h3 style="color:#dc3545; margin-bottom:0.75rem;">Delete Item?</h3>
         <p style="color:#666; margin-bottom:1.5rem;" id="eu-delete-confirm-text">
             This will permanently remove the item from the database.

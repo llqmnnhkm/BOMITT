@@ -55,6 +55,8 @@ $total_logical          = $_SESSION['total_logical'] ?? 0;
 $physical_optimized     = $_SESSION['physical_optimized'] ?? 0;
 $rec_physical           = $_SESSION['rec_physical'] ?? 0;
 $rec                    = $_SESSION['rec'] ?? '';
+$totalOSStorage         = $_SESSION['totalOSStorage'] ?? 0;
+$totalDataStorage       = $_SESSION['totalDataStorage'] ?? 0;
 
 // ----------------------
 // Compute values safely if POST exists
@@ -69,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $memory_spare    = $memory_provided - $memory_required;
 
     // Storage sizing
-    $current_requirements = ($totalOSStorage ?? 0 + $totalDataStorage ?? 0)/1000;
+    $current_requirements = (($totalOSStorage ?? 0) + ($totalDataStorage ?? 0)) / 1000;
 
     $growth          = 0.10;
     $change_rate     = 0.05;
@@ -111,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div id="container-server" class="question-container">
     <div class="container-header">
-        <div class="container-icon server">🖥️</div>
+        <div class="container-icon server"></div>
         <div class="container-title">
             <h3>Server Infrastructure</h3>
             <p>Configure your server requirements</p>
@@ -434,11 +436,11 @@ foreach ($rows as $i => $rowLabel) {
 <div class="form-actions" style="display:flex; gap:1rem; margin-top:2rem; align-items:center;">
     <button type="button" class="btn btn-secondary" onclick="hideAllContainers()"
         style="flex:0.6; background:#e2e8f0; color:#4a5568;">
-        ❌ Cancel
+         Cancel
     </button>
     <button type="button" class="btn btn-success" id="applyBtn"
         style="flex:1; background:#10b981; color:white;">
-        📊 Apply &amp; View Summary
+         Apply &amp; View Summary
     </button>
 </div>
     </form>
